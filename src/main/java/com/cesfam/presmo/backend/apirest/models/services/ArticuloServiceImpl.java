@@ -20,5 +20,23 @@ public class ArticuloServiceImpl implements IArticuloService{
 		// TODO Auto-generated method stub
 		return (List<Articulo>) articuloDao.findAll();
 	}
+	@Override
+	@Transactional(readOnly=true)
+	public Articulo findById(Long id) {
+		// TODO Auto-generated method stub
+		return articuloDao.findById(id).orElse(null);
+	}
+	@Override
+	@Transactional
+	public Articulo save(Articulo articulo) {
+		// TODO Auto-generated method stub
+		return articuloDao.save(articulo);
+	}
+	@Override
+	@Transactional
+	public void delete(Long id) {
+		// TODO Auto-generated method stub
+		articuloDao.deleteById(id);
+	}
 
 }
