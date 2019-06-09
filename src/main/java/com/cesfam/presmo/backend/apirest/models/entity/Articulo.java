@@ -20,9 +20,9 @@ public class Articulo implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@Column(name = "id_tipo")
+	@Column(name = "id_tipo", nullable=false)
 	private int idTipo;
-	@Column(name = "id_fabricante")
+	@Column(name = "id_fabricante", nullable=false)
 	private int idFabricante;
 	@Column(nullable = false)
 	private String componentes;
