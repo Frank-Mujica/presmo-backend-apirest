@@ -36,7 +36,7 @@ public class ArticuloRestController {
 		return articuloService.findById(id);
 	}
 	
-	@PostMapping("/articulos/")
+	@PostMapping("/articulos")
 	@ResponseStatus(HttpStatus.CREATED)
 	public Articulo create(@RequestBody Articulo articulo) {
 		return articuloService.save(articulo);
