@@ -8,6 +8,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "articulos")
@@ -20,18 +22,28 @@ public class Articulo implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	@NotEmpty(message = "no puede estar vacío")
 	@Column(name = "id_tipo", nullable=false)
 	private int idTipo;
+	@NotEmpty(message = "no puede estar vacío")
 	@Column(name = "id_fabricante", nullable=false)
 	private int idFabricante;
-	@Column(nullable = false)
-	private String componentes;
+	@NotEmpty(message = "no puede estar vacío")
+	@Size(min=4, max=50, message="el tamaño debe estar entre 4 y 50 caracteres")
 	@Column(nullable = false)
 	private String descripcion;
+	@NotEmpty(message = "no puede estar vacío")
+	@Size(min=4, max=25, message="el tamaño debe estar entre 4 y 25 caracteres")
+	@Column(nullable = false)
+	private String componentes;
+	@NotEmpty(message = "no puede estar vacío")
+	@Size(min=4, max=25, message="el tamaño debe estar entre 4 y 25 caracteres")
 	@Column(nullable = false)
 	private String contenido;
+	@NotEmpty
 	@Column(nullable = false)
 	private int gramaje;
+	@NotEmpty
 	@Column(nullable = false)
 	private int stock;
 
