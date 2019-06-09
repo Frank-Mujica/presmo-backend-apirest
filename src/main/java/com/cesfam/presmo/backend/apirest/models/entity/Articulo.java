@@ -20,12 +20,14 @@ public class Articulo implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@Column(name="id_tipo")
+	@Column(name = "id_tipo")
 	private int idTipo;
-	@Column(name="id_fabricante")
+	@Column(name = "id_fabricante")
 	private int idFabricante;
 	@Column(nullable = false)
 	private String componentes;
+	@Column(nullable = false)
+	private String descripcion;
 	@Column(nullable = false)
 	private String contenido;
 	@Column(nullable = false)
@@ -41,12 +43,28 @@ public class Articulo implements Serializable {
 		this.id = id;
 	}
 
+	public int getIdTipo() {
+		return idTipo;
+	}
+
+	public void setIdTipo(int idTipo) {
+		this.idTipo = idTipo;
+	}
+
 	public int getIdFabricante() {
 		return idFabricante;
 	}
 
 	public void setIdFabricante(int idFabricante) {
 		this.idFabricante = idFabricante;
+	}
+
+	public String getDescripcion() {
+		return descripcion;
+	}
+
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
 	}
 
 	public String getComponentes() {
@@ -83,14 +101,6 @@ public class Articulo implements Serializable {
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
-	}
-
-	public int getIdTipo() {
-		return idTipo;
-	}
-
-	public void setIdTipo(int idTipo) {
-		this.idTipo = idTipo;
 	}
 
 }
