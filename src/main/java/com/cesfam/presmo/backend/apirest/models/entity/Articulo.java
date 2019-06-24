@@ -40,12 +40,13 @@ public class Articulo implements Serializable {
 	@Size(min=4, max=25, message="el tamaño debe estar entre 4 y 25 caracteres")
 	@Column(nullable = false)
 	private String contenido;
-	@NotEmpty
+	@NotEmpty(message = "no puede estar vacío")
 	@Column(nullable = false)
 	private int gramaje;
-	@NotEmpty
+	@NotEmpty(message = "no puede estar vacío")
 	@Column(nullable = false)
-	private int stock;
+	private int stock;	
+	private String foto;
 
 	public Long getId() {
 		return id;
@@ -109,6 +110,14 @@ public class Articulo implements Serializable {
 
 	public void setStock(int stock) {
 		this.stock = stock;
+	}
+
+	public String getFoto() {
+		return foto;
+	}
+
+	public void setFoto(String foto) {
+		this.foto = foto;
 	}
 
 	public static long getSerialversionuid() {
