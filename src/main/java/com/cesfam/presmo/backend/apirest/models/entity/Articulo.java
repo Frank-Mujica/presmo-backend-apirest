@@ -22,11 +22,9 @@ public class Articulo implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@NotEmpty(message = "no puede estar vacío")
-	@Column(name = "id_tipo", nullable=false)
+	@Column(name = "id_tipo")
 	private int idTipo;
-	@NotEmpty(message = "no puede estar vacío")
-	@Column(name = "id_fabricante", nullable=false)
+	@Column(name = "id_fabricante")
 	private int idFabricante;
 	@NotEmpty(message = "no puede estar vacío")
 	@Size(min=4, max=50, message="el tamaño debe estar entre 4 y 50 caracteres")
@@ -51,11 +49,7 @@ public class Articulo implements Serializable {
 	public Long getId() {
 		return id;
 	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
+	
 	public int getIdTipo() {
 		return idTipo;
 	}
@@ -70,6 +64,10 @@ public class Articulo implements Serializable {
 
 	public void setIdFabricante(int idFabricante) {
 		this.idFabricante = idFabricante;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getDescripcion() {
