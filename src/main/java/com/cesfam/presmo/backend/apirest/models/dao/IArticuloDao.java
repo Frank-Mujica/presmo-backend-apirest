@@ -11,9 +11,9 @@ import com.cesfam.presmo.backend.apirest.models.entity.Fabricante;
 
 public interface IArticuloDao extends JpaRepository<Articulo, Long>{
 
-	@Query("from tipo")
+	@Query("from Tipo")
 	public List<Tipo> findAllTipos(); 
 	
-	@Query("from fabricante")
+	@Query("from Fabricante")
 	public List<Fabricante> findAllFabricantes(); 
 }

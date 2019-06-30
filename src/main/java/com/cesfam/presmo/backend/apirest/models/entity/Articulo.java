@@ -50,14 +50,14 @@ public class Articulo implements Serializable {
 	private String foto;
 	
 	@NotNull(message="Se debe indicar el tipo de artículo")
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name="tipo_id")
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="id_tipo")
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private Tipo tipo;
 	
 	@NotNull(message="Se debe indicar el fabricante del artículo")
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name="fabricante_id")
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="id_fabricante")
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private Fabricante fabricante;
 

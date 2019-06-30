@@ -20,7 +20,6 @@ public class Carnet implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@Column(nullable = false)
 	private String sector;
 	
 	public Long getId() {

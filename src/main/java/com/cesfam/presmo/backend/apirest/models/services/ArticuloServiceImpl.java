@@ -49,11 +49,13 @@ public class ArticuloServiceImpl implements IArticuloService{
 		articuloDao.deleteById(id);
 	}
 	@Override
+	@Transactional
 	public List<Tipo> findAllTipos() {
 		// TODO Auto-generated method stub
 		return articuloDao.findAllTipos();
 	}
 	@Override
+	@Transactional
 	public List<Fabricante> findAllFabricantes() {
 		// TODO Auto-generated method stub
 		return articuloDao.findAllFabricantes();

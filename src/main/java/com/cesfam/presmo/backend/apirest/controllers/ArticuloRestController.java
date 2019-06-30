@@ -41,7 +41,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.cesfam.presmo.backend.apirest.models.entity.Articulo;
 import com.cesfam.presmo.backend.apirest.models.entity.Fabricante;
-import com.cesfam.presmo.backend.apirest.models.entity.Sexo;
 import com.cesfam.presmo.backend.apirest.models.entity.Tipo;
 import com.cesfam.presmo.backend.apirest.models.services.IArticuloService;
 

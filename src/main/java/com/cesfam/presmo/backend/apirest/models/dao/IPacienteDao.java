@@ -12,13 +12,13 @@ import com.cesfam.presmo.backend.apirest.models.entity.Sexo;
 
 public interface IPacienteDao extends JpaRepository<Paciente, Long>{
 
-	@Query("from sexo")
+	@Query("from Sexo")
 	public List<Sexo> findAllSexos(); 
 	
-	@Query("from prevision")
+	@Query("from Prevision")
 	public List<Prevision> findAllPrevisiones(); 
 	
-	@Query("from sexo")
+	@Query("from Carnet")
 	public List<Carnet> findAllCarnets(); 
 	
 }

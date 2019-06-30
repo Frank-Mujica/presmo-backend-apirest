@@ -2,7 +2,6 @@ package com.cesfam.presmo.backend.apirest.models.entity;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -12,12 +11,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -92,13 +87,13 @@ public class Paciente implements Serializable {
 	private Sexo sexo;
 	
 	@NotNull(message="Se debe indicar el tipo de previsión del paciente")
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="prevision_id")
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private Prevision prevision;
 	
 	@NotNull(message="Se debe indicar el carnet del paciente")
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="carnet_id")
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private Carnet carnet;
