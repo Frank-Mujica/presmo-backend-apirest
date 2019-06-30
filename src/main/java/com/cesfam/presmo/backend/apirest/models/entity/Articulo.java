@@ -22,26 +22,26 @@ public class Articulo implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@Column(name = "id_tipo")
+	@Column(name = "id_tipo", nullable = false)
 	private int idTipo;
-	@Column(name = "id_fabricante")
+	@Column(name = "id_fabricante", nullable = false)
 	private int idFabricante;
-	@NotEmpty(message = "no puede estar vacío")
+	@NotEmpty(message = "El campo no puede estar vacío")
 	@Size(min=4, max=50, message="el tamaño debe estar entre 4 y 50 caracteres")
 	@Column(nullable = false)
 	private String descripcion;
-	@NotEmpty(message = "no puede estar vacío")
+	@NotEmpty(message = "El campo no puede estar vacío")
 	@Size(min=4, max=25, message="el tamaño debe estar entre 4 y 25 caracteres")
 	@Column(nullable = false)
 	private String componentes;
-	@NotEmpty(message = "no puede estar vacío")
+	@NotEmpty(message = "El campo no puede estar vacío")
 	@Size(min=4, max=25, message="el tamaño debe estar entre 4 y 25 caracteres")
 	@Column(nullable = false)
 	private String contenido;
-	@NotEmpty(message = "no puede estar vacío")
+	@NotEmpty(message = "El campo no puede estar vacío")
 	@Column(nullable = false)
 	private int gramaje;
-	@NotEmpty(message = "no puede estar vacío")
+	@NotEmpty(message = "El campo no puede estar vacío")
 	@Column(nullable = false)
 	private int stock;	
 	private String foto;

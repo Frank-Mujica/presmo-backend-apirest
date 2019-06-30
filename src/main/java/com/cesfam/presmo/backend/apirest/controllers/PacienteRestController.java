@@ -84,7 +84,7 @@ public class PacienteRestController {
 		return new ResponseEntity<Paciente>(paciente, HttpStatus.OK);
 	}
 	
-	@Secured("ROLE_MEDICO")
+	@Secured("medico")
 	@PostMapping("/pacientes")
 	public ResponseEntity<?> create(@Valid @RequestBody Paciente paciente, BindingResult result) {
 		
@@ -115,7 +115,7 @@ public class PacienteRestController {
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
 	}
 	
-	@Secured("ROLE_MEDICO")
+	@Secured("medico")
 	@PutMapping("/pacientes/{id}")
 	public ResponseEntity<?> update(@Valid @RequestBody Paciente paciente, BindingResult result, @PathVariable Long id) {
 		
@@ -141,23 +141,22 @@ public class PacienteRestController {
 		}
 		
 		try {
-		/*
-		articuloActual.setIdTipo(articulo.getIdTipo());
-		articuloActual.setIdFabricante(articulo.getIdFabricante());
-		*/
+
 		pacienteActual.setNombre(paciente.getNombre());
 		pacienteActual.setApellidoPaterno(paciente.getApellidoPaterno());
 		pacienteActual.setApellidoMaterno(paciente.getApellidoPaterno());
 		pacienteActual.setRut(paciente.getRut());
 		pacienteActual.setFechaNacimiento(paciente.getFechaNacimiento());
-		pacienteActual.setSexo(paciente.getSexo());
+		pacienteActual.setNumeroCelular(paciente.getNumeroCelular());
+		pacienteActual.setTelefonoFijo(paciente.getTelefonoFijo());
+		pacienteActual.setIdSexo(paciente.getIdSexo());
 		pacienteActual.setRutTutor(paciente.getRutTutor());
 		pacienteActual.setNombreTutor(paciente.getNombreTutor());
 		pacienteActual.setEmailTutor(paciente.getEmailTutor());
-		pacienteActual.setIdRegion(paciente.getIdRegion());
-		pacienteActual.setIdComuna(paciente.getIdComuna());
+		pacienteActual.setRegion(paciente.getRegion());
+		pacienteActual.setComuna(paciente.getComuna());
 		pacienteActual.setIdPrevision(paciente.getIdPrevision());
-		pacienteActual.setIdNacionalidad(paciente.getIdPrevision());
+		pacienteActual.setNacionalidad(paciente.getNacionalidad());
 		
 		
 		pacienteUpdate = pacienteService.save(pacienteActual);
@@ -173,7 +172,7 @@ public class PacienteRestController {
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
 	}
 	
-	@Secured("ROLE_MEDICO")
+	@Secured("medico")
 	@DeleteMapping("/pacientes/{id}")
 	public ResponseEntity<?> delete(@PathVariable Long id) {
 		Map<String, Object> response = new HashMap<>();
@@ -202,7 +201,7 @@ public class PacienteRestController {
 		
 	}
 	
-	@Secured({"ROLE_FARMACEUTICO", "ROLE_MEDICO"})
+	@Secured({"farmaceutico", "medico"})
 	@PostMapping("/pacientes/upload")
 	public ResponseEntity<?> upload(@RequestParam("file") MultipartFile file, @RequestParam("id") Long id){
 		Map<String, Object> response = new HashMap<>();
