@@ -5,23 +5,24 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.cesfam.presmo.backend.apirest.models.dao.IPrevisionDao;
-import com.cesfam.presmo.backend.apirest.models.entity.Prevision;
+import com.cesfam.presmo.backend.apirest.models.dao.ICarnetDao;
+import com.cesfam.presmo.backend.apirest.models.entity.Carnet;
 
-public class PrevisionServiceImpl implements IPrevisionService {
+public class CarnetServiceImpl implements ICarnetService {
 
 	@Autowired
-	private IPrevisionDao previsionDao;
+	private ICarnetDao carnetDao;
 	@Override
 	@Transactional(readOnly=true)
-	public Prevision findById(Long id) {
+	public Carnet findById(Long id) {
 		// TODO Auto-generated method stub
-		return previsionDao.findById(id).orElse(null);
+		return carnetDao.findById(id).orElse(null);
 	}
 	
 	@Override
-	public List<Prevision> findAll() {
+	public List<Carnet> findAll() {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
 }

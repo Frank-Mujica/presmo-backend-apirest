@@ -6,4 +6,5 @@ import com.cesfam.presmo.backend.apirest.models.entity.Sexo;
 
 public interface ISexoDao extends JpaRepository<Sexo, Long>{
 
+	public Sexo findById(int id);
 }

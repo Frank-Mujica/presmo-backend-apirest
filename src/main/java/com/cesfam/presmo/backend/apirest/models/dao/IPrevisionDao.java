@@ -6,4 +6,6 @@ import com.cesfam.presmo.backend.apirest.models.entity.Prevision;
 
 public interface IPrevisionDao extends JpaRepository<Prevision, Long> {
 
+	public Prevision findById(int id);
+	
 }

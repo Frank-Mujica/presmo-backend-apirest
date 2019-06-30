@@ -84,7 +84,7 @@ public class ArticuloRestController {
 		return new ResponseEntity<Articulo>(articulo, HttpStatus.OK);
 	}
 	
-	@Secured("farmaceutico")
+	@Secured("Farmaceutico")
 	@PostMapping("/articulos")
 	public ResponseEntity<?> create(@Valid @RequestBody Articulo articulo, BindingResult result) {
 		
@@ -115,7 +115,7 @@ public class ArticuloRestController {
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
 	}
 	
-	@Secured("farmaceutico")
+	@Secured("Farmaceutico")
 	@PutMapping("/articulos/{id}")
 	public ResponseEntity<?> update(@Valid @RequestBody Articulo articulo, BindingResult result, @PathVariable Long id) {
 		
@@ -163,7 +163,7 @@ public class ArticuloRestController {
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
 	}
 	
-	@Secured("farmaceutico")
+	@Secured("Farmaceutico")
 	@DeleteMapping("/articulos/{id}")
 	public ResponseEntity<?> delete(@PathVariable Long id) {
 		Map<String, Object> response = new HashMap<>();
@@ -192,7 +192,7 @@ public class ArticuloRestController {
 		
 	}
 	
-	@Secured({"farmaceutico", "medico"})
+	@Secured({"Farmaceutico", "Medico"})
 	@PostMapping("/articulos/upload")
 	public ResponseEntity<?> upload(@RequestParam("file") MultipartFile file, @RequestParam("id") Long id){
 		Map<String, Object> response = new HashMap<>();

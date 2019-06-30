@@ -13,25 +13,36 @@ INSERT INTO articulos (idTipo, idFabricante, descripcion, componentes, contenido
 INSERT INTO usuarios (username, nombre, apellidos, email, password, enabled) VALUES ('frank666', 'frank', 'mujica fuentealba', 'f.mujica1995@gmail.com', '$2a$10$1/FWMTqX/H4enA5s9k.ZGupTEudJhq0mk1QQMzYvRGjpdBw.nwQSu', 2);
 INSERT INTO usuarios (username, nombre, apellidos, email, password, enabled) VALUES ('suicideboy', 'suicide', 'boys', 's.boys666@gmail.com', '$2a$10$ua67IMKby8nIhNyS5LxXZezHbxz0b1zfjH13dp2gsNCnA6jxbPKg6', 1);
 
-INSERT INTO roles (nombre) VALUES ('medico');
-INSERT INTO roles (nombre) VALUES ('farmaceutico');
+INSERT INTO roles (nombre) VALUES ('Medico');
+INSERT INTO roles (nombre) VALUES ('Farmaceutico');
 
 INSERT INTO usuarios_roles (usuario_id, role_id) VALUES (1, 1);
 INSERT INTO usuarios_roles (usuario_id, role_id) VALUES (2, 2);
 INSERT INTO usuarios_roles (usuario_id, role_id) VALUES (2, 1);
 
-INSERT INTO sexo (nombre) VALUES ('masculino');
-INSERT INTO sexo (nombre) VALUES ('femenino');
+INSERT INTO sexo (nombre) VALUES ('Masculino');
+INSERT INTO sexo (nombre) VALUES ('Femenino');
 
 INSERT INTO pacientes_sexo (paciente_id, sexo_id) VALUES (1, 1);
 INSERT INTO pacientes_sexo (paciente_id, sexo_id) VALUES (2, 2);
 INSERT INTO pacientes_sexo (paciente_id, sexo_id) VALUES (2, 1);
 
-INSERT INTO prevision (nombre) VALUES ('fonasa');
-INSERT INTO prevision (nombre) VALUES ('isapre');
+INSERT INTO prevision (nombre) VALUES ('Fonasa');
+INSERT INTO prevision (nombre) VALUES ('Isapre');
 
 INSERT INTO pacientes_prevision (paciente_id, prevision_id) VALUES (1, 1);
 INSERT INTO pacientes_prevision (paciente_id, prevision_id) VALUES (2, 2);
 INSERT INTO pacientes_prevision (paciente_id, prevision_id) VALUES (2, 1);
+
+INSERT INTO carnet (sector) VALUES ('Rosado');
+INSERT INTO carnet (sector) VALUES ('Celeste');
+INSERT INTO carnet (sector) VALUES ('Verde');
+
+INSERT INTO pacientes_carnet (paciente_id, carnet_id) VALUES (1, 1);
+INSERT INTO pacientes_carnet (paciente_id, carnet_id) VALUES (2, 2);
+INSERT INTO pacientes_carnet (paciente_id, carnet_id) VALUES (2, 1);
+INSERT INTO pacientes_carnet (paciente_id, carnet_id) VALUES (3, 3);
+INSERT INTO pacientes_carnet (paciente_id, carnet_id) VALUES (3, 2);
+INSERT INTO pacientes_carnet (paciente_id, carnet_id) VALUES (3, 1);
 
 

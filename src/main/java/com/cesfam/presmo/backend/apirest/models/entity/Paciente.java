@@ -91,6 +91,10 @@ public class Paciente implements Serializable {
 	@JoinTable(name = "pacientes_prevision", joinColumns = @JoinColumn(name = "paciente_id"), inverseJoinColumns = @JoinColumn(name = "prevision_id"), uniqueConstraints = {
 			@UniqueConstraint(columnNames = { "paciente_id", "prevision_id" }) })
 	private List<Prevision> prevision;
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinTable(name = "pacientes_carnet", joinColumns = @JoinColumn(name = "paciente_id"), inverseJoinColumns = @JoinColumn(name = "carnet_id"), uniqueConstraints = {
+			@UniqueConstraint(columnNames = { "paciente_id", "carnet_id" }) })
+	private List<Carnet> carnet;
 
 	public Long getId() {
 		return id;
@@ -251,6 +255,14 @@ public class Paciente implements Serializable {
 
 	public void setPrevision(List<Prevision> prevision) {
 		this.prevision = prevision;
+	}
+
+	public List<Carnet> getCarnet() {
+		return carnet;
+	}
+
+	public void setCarnet(List<Carnet> carnet) {
+		this.carnet = carnet;
 	}
 
 }
