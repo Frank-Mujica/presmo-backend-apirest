@@ -13,8 +13,8 @@ INSERT INTO articulos (id_tipo, id_fabricante, descripcion, componentes, conteni
 INSERT INTO usuarios (username, nombre, apellidos, email, password, enabled) VALUES ('frank666', 'frank', 'mujica fuentealba', 'f.mujica1995@gmail.com', '$2a$10$1/FWMTqX/H4enA5s9k.ZGupTEudJhq0mk1QQMzYvRGjpdBw.nwQSu', 2);
 INSERT INTO usuarios (username, nombre, apellidos, email, password, enabled) VALUES ('suicideboy', 'suicide', 'boys', 's.boys666@gmail.com', '$2a$10$ua67IMKby8nIhNyS5LxXZezHbxz0b1zfjH13dp2gsNCnA6jxbPKg6', 1);
 
-INSERT INTO roles (id, nombre) VALUES (1, 'ROLE_MEDICO');
-INSERT INTO roles (id, nombre) VALUES (2, 'ROLE_FARMACEUTICO');
+INSERT INTO roles (id, nombre) VALUES ('Medico');
+INSERT INTO roles (id, nombre) VALUES ('Farmaceutico');
 
 INSERT INTO usuarios_roles (usuario_id, role_id) VALUES (1, 1);
 INSERT INTO usuarios_roles (usuario_id, role_id) VALUES (2, 2);
