@@ -2,6 +2,7 @@ package com.cesfam.presmo.backend.apirest.models.entity;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -49,14 +50,14 @@ public class Articulo implements Serializable {
 	private String foto;
 	
 	@NotNull(message="Se debe indicar el tipo de artículo")
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="id_tipo")
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name="tipo_id")
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private Tipo tipo;
 	
 	@NotNull(message="Se debe indicar el fabricante del artículo")
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="id_fabricante")
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name="fabricante_id")
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private Fabricante fabricante;
 

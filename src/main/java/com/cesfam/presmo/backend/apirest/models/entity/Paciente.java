@@ -87,13 +87,13 @@ public class Paciente implements Serializable {
 	private Sexo sexo;
 	
 	@NotNull(message="Se debe indicar el tipo de previsión del paciente")
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name="prevision_id")
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private Prevision prevision;
 	
 	@NotNull(message="Se debe indicar el carnet del paciente")
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name="carnet_id")
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private Carnet carnet;
