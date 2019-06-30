@@ -9,7 +9,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.cesfam.presmo.backend.apirest.models.dao.IPacienteDao;
+import com.cesfam.presmo.backend.apirest.models.entity.Carnet;
 import com.cesfam.presmo.backend.apirest.models.entity.Paciente;
+import com.cesfam.presmo.backend.apirest.models.entity.Prevision;
+import com.cesfam.presmo.backend.apirest.models.entity.Sexo;
 
 @Service
 public class PacienteServiceImpl implements IPacienteService{
@@ -45,6 +48,24 @@ public class PacienteServiceImpl implements IPacienteService{
 	public void delete(Long id) {
 		// TODO Auto-generated method stub
 		pacienteDao.deleteById(id);
+	}
+	@Override
+	@Transactional
+	public List<Sexo> findAllSexos() {
+		// TODO Auto-generated method stub
+		return pacienteDao.findAllSexos();
+	}
+	@Override
+	@Transactional
+	public List<Prevision> findAllPrevisiones() {
+		// TODO Auto-generated method stub
+		return pacienteDao.findAllPrevisiones();
+	}
+	@Override
+	@Transactional
+	public List<Carnet> findAllCarnets() {
+		// TODO Auto-generated method stub
+		return pacienteDao.findAllCarnets();
 	}
 
 }

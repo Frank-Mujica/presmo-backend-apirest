@@ -39,7 +39,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.cesfam.presmo.backend.apirest.models.entity.Carnet;
 import com.cesfam.presmo.backend.apirest.models.entity.Paciente;
+import com.cesfam.presmo.backend.apirest.models.entity.Prevision;
+import com.cesfam.presmo.backend.apirest.models.entity.Sexo;
 import com.cesfam.presmo.backend.apirest.models.services.IPacienteService;
 
 @CrossOrigin(origins= {"http://localhost:4200"})
@@ -149,14 +152,15 @@ public class PacienteRestController {
 		pacienteActual.setFechaNacimiento(paciente.getFechaNacimiento());
 		pacienteActual.setNumeroCelular(paciente.getNumeroCelular());
 		pacienteActual.setTelefonoFijo(paciente.getTelefonoFijo());
-		pacienteActual.setIdSexo(paciente.getIdSexo());
 		pacienteActual.setRutTutor(paciente.getRutTutor());
 		pacienteActual.setNombreTutor(paciente.getNombreTutor());
 		pacienteActual.setEmailTutor(paciente.getEmailTutor());
 		pacienteActual.setRegion(paciente.getRegion());
 		pacienteActual.setComuna(paciente.getComuna());
-		pacienteActual.setIdPrevision(paciente.getIdPrevision());
 		pacienteActual.setNacionalidad(paciente.getNacionalidad());
+		pacienteActual.setSexo(paciente.getSexo());
+		pacienteActual.setPrevision(paciente.getPrevision());
+		pacienteActual.setCarnet(paciente.getCarnet());
 		
 		
 		pacienteUpdate = pacienteService.save(pacienteActual);
@@ -263,6 +267,21 @@ public class PacienteRestController {
 		cabecera.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + recurso.getFilename() + "\"");
 		
 		return new ResponseEntity<Resource>(recurso, cabecera, HttpStatus.OK);
+	}
+	
+	@GetMapping("/pacientes/sexos")
+	public List<Sexo> listarSexos(){
+		return pacienteService.findAllSexos();
+	}
+	
+	@GetMapping("/pacientes/previsiones")
+	public List<Prevision> listarPrevisiones(){
+		return pacienteService.findAllPrevisiones();
+	}
+	
+	@GetMapping("/pacientes/carnets")
+	public List<Carnet> listarCarnets(){
+		return pacienteService.findAllCarnets();
 	}
 }
 

@@ -2,14 +2,21 @@ package com.cesfam.presmo.backend.apirest.models.entity;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "articulos")
@@ -22,10 +29,6 @@ public class Articulo implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@Column(name = "id_tipo", nullable = false)
-	private int idTipo;
-	@Column(name = "id_fabricante", nullable = false)
-	private int idFabricante;
 	@NotEmpty(message = "El campo no puede estar vacío")
 	@Size(min=4, max=50, message="el tamaño debe estar entre 4 y 50 caracteres")
 	@Column(nullable = false)
@@ -45,27 +48,23 @@ public class Articulo implements Serializable {
 	@Column(nullable = false)
 	private int stock;	
 	private String foto;
+	
+	@NotNull(message="Se debe indicar el tipo de artículo")
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name="tipo_id")
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	private Tipo tipo;
+	
+	@NotNull(message="Se debe indicar el fabricante del artículo")
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name="fabricante_id")
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	private Fabricante fabricante;
 
 	public Long getId() {
 		return id;
 	}
 	
-	public int getIdTipo() {
-		return idTipo;
-	}
-
-	public void setIdTipo(int idTipo) {
-		this.idTipo = idTipo;
-	}
-
-	public int getIdFabricante() {
-		return idFabricante;
-	}
-
-	public void setIdFabricante(int idFabricante) {
-		this.idFabricante = idFabricante;
-	}
-
 	public void setId(Long id) {
 		this.id = id;
 	}
@@ -120,6 +119,22 @@ public class Articulo implements Serializable {
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	public Tipo getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(Tipo tipo) {
+		this.tipo = tipo;
+	}
+
+	public Fabricante getFabricante() {
+		return fabricante;
+	}
+
+	public void setFabricante(Fabricante fabricante) {
+		this.fabricante = fabricante;
 	}
 
 }

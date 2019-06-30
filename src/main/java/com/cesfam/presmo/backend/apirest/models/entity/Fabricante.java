@@ -10,8 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "previsiones")
-public class Prevision implements Serializable{
+@Table(name = "fabricantes")
+public class Fabricante implements Serializable{
 
 	/**
 	 * 
@@ -36,3 +36,4 @@ public class Prevision implements Serializable{
 	}
 
 }
+

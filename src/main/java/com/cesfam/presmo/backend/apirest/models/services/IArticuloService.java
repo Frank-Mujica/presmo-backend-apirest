@@ -6,6 +6,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import com.cesfam.presmo.backend.apirest.models.entity.Articulo;
+import com.cesfam.presmo.backend.apirest.models.entity.Tipo;
+import com.cesfam.presmo.backend.apirest.models.entity.Fabricante;
 
 public interface IArticuloService {
 	
@@ -18,5 +20,9 @@ public interface IArticuloService {
 	public Articulo save(Articulo articulo);
 	
 	public void delete (Long id);
+	
+	public List<Tipo> findAllTipos();
+	
+	public List<Fabricante> findAllFabricantes();
 
 }

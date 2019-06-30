@@ -40,6 +40,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.cesfam.presmo.backend.apirest.models.entity.Articulo;
+import com.cesfam.presmo.backend.apirest.models.entity.Fabricante;
+import com.cesfam.presmo.backend.apirest.models.entity.Sexo;
+import com.cesfam.presmo.backend.apirest.models.entity.Tipo;
 import com.cesfam.presmo.backend.apirest.models.services.IArticuloService;
 
 @CrossOrigin(origins= {"http://localhost:4200"})
@@ -141,13 +144,14 @@ public class ArticuloRestController {
 		}
 		
 		try {
-		articuloActual.setIdTipo(articulo.getIdTipo());
-		articuloActual.setIdFabricante(articulo.getIdFabricante());
+
 		articuloActual.setDescripcion(articulo.getDescripcion());
 		articuloActual.setComponentes(articulo.getComponentes());
 		articuloActual.setContenido(articulo.getContenido());
 		articuloActual.setGramaje(articulo.getGramaje());
 		articuloActual.setStock(articulo.getStock());
+		articuloActual.setTipo(articulo.getTipo());
+		articuloActual.setFabricante(articulo.getFabricante());
 		
 		
 		articuloUpdate = articuloService.save(articuloActual);
@@ -254,5 +258,15 @@ public class ArticuloRestController {
 		cabecera.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + recurso.getFilename() + "\"");
 		
 		return new ResponseEntity<Resource>(recurso, cabecera, HttpStatus.OK);
+	}
+	
+	@GetMapping("/articulos/tipos")
+	public List<Tipo> listarTipos(){
+		return articuloService.findAllTipos();
+	}
+	
+	@GetMapping("/articulos/fabricantes")
+	public List<Fabricante> listarFabricantes(){
+		return articuloService.findAllFabricantes();
 	}
 }

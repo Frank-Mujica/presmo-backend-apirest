@@ -10,6 +10,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.cesfam.presmo.backend.apirest.models.dao.IArticuloDao;
 import com.cesfam.presmo.backend.apirest.models.entity.Articulo;
+import com.cesfam.presmo.backend.apirest.models.entity.Fabricante;
+import com.cesfam.presmo.backend.apirest.models.entity.Tipo;
 
 @Service
 public class ArticuloServiceImpl implements IArticuloService{
@@ -45,6 +47,16 @@ public class ArticuloServiceImpl implements IArticuloService{
 	public void delete(Long id) {
 		// TODO Auto-generated method stub
 		articuloDao.deleteById(id);
+	}
+	@Override
+	public List<Tipo> findAllTipos() {
+		// TODO Auto-generated method stub
+		return articuloDao.findAllTipos();
+	}
+	@Override
+	public List<Fabricante> findAllFabricantes() {
+		// TODO Auto-generated method stub
+		return articuloDao.findAllFabricantes();
 	}
 
 }

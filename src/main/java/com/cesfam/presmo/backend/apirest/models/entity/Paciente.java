@@ -14,11 +14,16 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "pacientes")
@@ -66,8 +71,6 @@ public class Paciente implements Serializable {
 	@Size(min = 8, max = 8, message = "el número de teléfono debe tener 8 digitos")
 	@Column(name = "telefono_fijo", nullable = true)
 	private int telefonoFijo;
-	@Column(name = "id_sexo", nullable = false)
-	private int idSexo;
 	@NotEmpty(message = "El campo no puede estar vacío puede estar vacío")
 	@Size(min = 9, max = 9, message = "el rut debe tener un tamaño de 9 caracteres")
 	@Column(name = "rut_tutor", nullable = false, unique = true)
@@ -80,21 +83,25 @@ public class Paciente implements Serializable {
 	@Email(message = "debe contener una dirección de correo electrónico valida")
 	@Column(name = "email_tutor", unique = true, nullable = false)
 	private String emailTutor;
-	@Column(name = "id_prevision", nullable = false)
-	private int idPrevision;
 	private String foto;
-	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinTable(name = "pacientes_sexo", joinColumns = @JoinColumn(name = "paciente_id"), inverseJoinColumns = @JoinColumn(name = "sexo_id"), uniqueConstraints = {
-			@UniqueConstraint(columnNames = { "paciente_id", "sexo_id" }) })
-	private List<Sexo> sexo;
-	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinTable(name = "pacientes_prevision", joinColumns = @JoinColumn(name = "paciente_id"), inverseJoinColumns = @JoinColumn(name = "prevision_id"), uniqueConstraints = {
-			@UniqueConstraint(columnNames = { "paciente_id", "prevision_id" }) })
-	private List<Prevision> prevision;
-	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinTable(name = "pacientes_carnet", joinColumns = @JoinColumn(name = "paciente_id"), inverseJoinColumns = @JoinColumn(name = "carnet_id"), uniqueConstraints = {
-			@UniqueConstraint(columnNames = { "paciente_id", "carnet_id" }) })
-	private List<Carnet> carnet;
+	
+	@NotNull(message="Se debe indicar el sexo del paciente")
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name="sexo_id")
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	private Sexo sexo;
+	
+	@NotNull(message="Se debe indicar el tipo de previsión del paciente")
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name="prevision_id")
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	private Prevision prevision;
+	
+	@NotNull(message="Se debe indicar el carnet del paciente")
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name="carnet_id")
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	private Carnet carnet;
 
 	public Long getId() {
 		return id;
@@ -159,14 +166,6 @@ public class Paciente implements Serializable {
 	public void setTelefonoFijo(int telefonoFijo) {
 		this.telefonoFijo = telefonoFijo;
 	}
-	
-	public int getIdSexo() {
-		return idSexo;
-	}
-	
-	public void setIdSexo(int idSexo) {
-		this.idSexo = idSexo;
-	}
 
 	public String getRutTutor() {
 		return rutTutor;
@@ -216,15 +215,6 @@ public class Paciente implements Serializable {
 		this.nacionalidad = nacionalidad;
 	}
 
-	public int getIdPrevision() {
-		return idPrevision;
-	}
-
-	public void setIdPrevision(int idPrevision) {
-		this.idPrevision = idPrevision;
-	}
-
-
 	public String getFoto() {
 		return foto;
 	}
@@ -237,31 +227,27 @@ public class Paciente implements Serializable {
 		return serialVersionUID;
 	}
 
-	public List<Sexo> getSexo() {
+	public Sexo getSexo() {
 		return sexo;
 	}
 
-	public void setSexo(List<Sexo> sexo) {
+	public void setSexo(Sexo sexo) {
 		this.sexo = sexo;
 	}
 
-	public void setSexo(int idSexo) {
-		this.idSexo = idSexo;
-	}
-
-	public List<Prevision> getPrevision() {
+	public Prevision getPrevision() {
 		return prevision;
 	}
 
-	public void setPrevision(List<Prevision> prevision) {
+	public void setPrevision(Prevision prevision) {
 		this.prevision = prevision;
 	}
 
-	public List<Carnet> getCarnet() {
+	public Carnet getCarnet() {
 		return carnet;
 	}
 
-	public void setCarnet(List<Carnet> carnet) {
+	public void setCarnet(Carnet carnet) {
 		this.carnet = carnet;
 	}
 
