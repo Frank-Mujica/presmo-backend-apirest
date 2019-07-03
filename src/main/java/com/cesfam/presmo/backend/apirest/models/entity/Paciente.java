@@ -48,15 +48,6 @@ public class Paciente implements Serializable {
 	@Column(nullable = false, unique = true)
 	private String rut;
 	@NotEmpty(message = "El campo no puede estar vacío")
-	@Column(nullable = false, unique = true)
-	private String region;
-	@NotEmpty(message = "El campo no puede estar vacío")
-	@Column(nullable = false, unique = true)
-	private String comuna;
-	@NotEmpty(message = "El campo no puede estar vacío")
-	@Column(nullable = false, unique = true)
-	private String nacionalidad;
-	@NotEmpty(message = "El campo no puede estar vacío")
 	@Column(name = "fecha_nacimiento", nullable = false)
 	private Date fechaNacimiento;
 	@NotEmpty(message = "El campo no puede estar vacío")
@@ -80,6 +71,12 @@ public class Paciente implements Serializable {
 	private String emailTutor;
 	private String foto;
 	
+	@NotNull(message="Se debe indicar el estado civil del paciente")
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name="estado_civil_id")
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	private EstadoCivil estadoCivil;
+	
 	@NotNull(message="Se debe indicar el sexo del paciente")
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name="sexo_id")
@@ -97,6 +94,24 @@ public class Paciente implements Serializable {
 	@JoinColumn(name="carnet_id")
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private Carnet carnet;
+	
+	@NotNull(message="Se debe indicar la regón del paciente")
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name="region_id")
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	private Region region;
+	
+	@NotNull(message="Se debe indicar el carnet del paciente")
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name="comuna_id")
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	private Comuna comuna;
+	
+	@NotNull(message="Se debe indicar la nacionalidad del paciente")
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name="nacionalidad_id")
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	private Nacionalidad nacionalidad;
 
 	public Long getId() {
 		return id;
@@ -186,30 +201,6 @@ public class Paciente implements Serializable {
 		this.emailTutor = emailTutor;
 	}
 
-	public String getRegion() {
-		return region;
-	}
-
-	public void setRegion(String region) {
-		this.region = region;
-	}
-
-	public String getComuna() {
-		return comuna;
-	}
-
-	public void setComuna(String comuna) {
-		this.comuna = comuna;
-	}
-	
-	public String getNacionalidad() {
-		return nacionalidad;
-	}
-
-	public void setNacionalidad(String nacionalidad) {
-		this.nacionalidad = nacionalidad;
-	}
-
 	public String getFoto() {
 		return foto;
 	}
@@ -220,6 +211,14 @@ public class Paciente implements Serializable {
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	public EstadoCivil getEstadoCivil() {
+		return estadoCivil;
+	}
+
+	public void setEstadoCivil(EstadoCivil estadoCivil) {
+		this.estadoCivil = estadoCivil;
 	}
 
 	public Sexo getSexo() {
@@ -244,6 +243,30 @@ public class Paciente implements Serializable {
 
 	public void setCarnet(Carnet carnet) {
 		this.carnet = carnet;
+	}
+
+	public Region getRegion() {
+		return region;
+	}
+
+	public void setRegion(Region region) {
+		this.region = region;
+	}
+
+	public Comuna getComuna() {
+		return comuna;
+	}
+
+	public void setComuna(Comuna comuna) {
+		this.comuna = comuna;
+	}
+
+	public Nacionalidad getNacionalidad() {
+		return nacionalidad;
+	}
+
+	public void setNacionalidad(Nacionalidad nacionalidad) {
+		this.nacionalidad = nacionalidad;
 	}
 
 }

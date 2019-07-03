@@ -39,63 +39,59 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.cesfam.presmo.backend.apirest.models.entity.Carnet;
-import com.cesfam.presmo.backend.apirest.models.entity.Comuna;
-import com.cesfam.presmo.backend.apirest.models.entity.EstadoCivil;
-import com.cesfam.presmo.backend.apirest.models.entity.Nacionalidad;
-import com.cesfam.presmo.backend.apirest.models.entity.Paciente;
-import com.cesfam.presmo.backend.apirest.models.entity.Prevision;
-import com.cesfam.presmo.backend.apirest.models.entity.Region;
+import com.cesfam.presmo.backend.apirest.models.entity.Medico;
 import com.cesfam.presmo.backend.apirest.models.entity.Sexo;
-import com.cesfam.presmo.backend.apirest.models.services.IPacienteService;
+import com.cesfam.presmo.backend.apirest.models.entity.Especialidad;
+import com.cesfam.presmo.backend.apirest.models.entity.Usuario;
+import com.cesfam.presmo.backend.apirest.models.services.IMedicoService;
 
 @CrossOrigin(origins= {"http://localhost:4200"})
 @RestController
 @RequestMapping("/api/v1")
-public class PacienteRestController {
+public class MedicoRestController {
 	
 	@Autowired
-	private IPacienteService pacienteService;
+	private IMedicoService medicoService;
 	
 	private final Logger log = LoggerFactory.getLogger(PacienteRestController.class);
 	
-	@GetMapping("/pacientes")
-	public List<Paciente> index(){
-		return pacienteService.findAll();
+	@GetMapping("/medicos")
+	public List<Medico> index(){
+		return medicoService.findAll();
 	}
 	
-	@GetMapping("/pacientes/page/{page}")
-	public Page<Paciente> index(@PathVariable Integer page){
-		return pacienteService.findAll(PageRequest.of(page, 6));
+	@GetMapping("/medicos/page/{page}")
+	public Page<Medico> index(@PathVariable Integer page){
+		return medicoService.findAll(PageRequest.of(page, 6));
 	}
 	
-	@GetMapping("/pacientes/{id}")
+	@GetMapping("/medicos/{id}")
 	public ResponseEntity<?> show(@PathVariable Long id) {
 		
-		Paciente paciente = null;
+		Medico medico = null;
 		Map<String, Object> response = new HashMap<>();
 		try {
-			paciente = pacienteService.findById(id);
+			medico = medicoService.findById(id);
 		} catch(DataAccessException e) {
-			response.put("mensaje", "Error al buscar al paciente");
+			response.put("mensaje", "Error al buscar al médico");
 			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		
 		
-		if(paciente == null) {
-			response.put("mensaje", "El paciente ID: ".concat(id.toString().concat(" no existe en la base de datos")));
+		if(medico == null) {
+			response.put("mensaje", "El médico ID: ".concat(id.toString().concat(" no existe en la base de datos")));
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
 		}
 		
-		return new ResponseEntity<Paciente>(paciente, HttpStatus.OK);
+		return new ResponseEntity<Medico>(medico, HttpStatus.OK);
 	}
 	
-	@Secured("Médico")
-	@PostMapping("/pacientes")
-	public ResponseEntity<?> create(@Valid @RequestBody Paciente paciente, BindingResult result) {
+	@Secured("Administrador")
+	@PostMapping("/medicos")
+	public ResponseEntity<?> create(@Valid @RequestBody Medico medico, BindingResult result) {
 		
-		Paciente pacienteNew = null;
+		Medico medicoNew = null;
 		Map<String, Object> response = new HashMap<>();
 		
 		if(result.hasErrors()) {
@@ -110,24 +106,24 @@ public class PacienteRestController {
 		}
 		
 		try {
-			pacienteNew = pacienteService.save(paciente);
+			medicoNew = medicoService.save(medico);
 		} catch(DataAccessException e) {
-			response.put("mensaje", "Error al realizar el registro en la base de datos");
+			response.put("mensaje", "Error al registrar al médico en la base de datos");
 			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		
-		response.put("mensaje", "El paciente ha sido registrado con éxito!");
-		response.put("paciente", pacienteNew);
+		response.put("mensaje", "El médico ha sido registrado con éxito!");
+		response.put("médico", medicoNew);
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
 	}
 	
-	@Secured("Médico")
-	@PutMapping("/pacientes/{id}")
-	public ResponseEntity<?> update(@Valid @RequestBody Paciente paciente, BindingResult result, @PathVariable Long id) {
+	@Secured("Administrador")
+	@PutMapping("/medicos/{id}")
+	public ResponseEntity<?> update(@Valid @RequestBody Medico medico, BindingResult result, @PathVariable Long id) {
 		
-		Paciente pacienteActual = pacienteService.findById(id);
-		Paciente pacienteUpdate = null;
+		Medico medicoActual = medicoService.findById(id);
+		Medico medicoUpdate = null;
 		
 		Map<String, Object> response = new HashMap<>();
 		
@@ -142,51 +138,45 @@ public class PacienteRestController {
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.BAD_REQUEST);
 		}
 		
-		if(paciente == null) {
-			response.put("mensaje", "Error: no se pudo editar, el paciente ID: ".concat(id.toString().concat(" no existe en la base de datos")));
+		if(medico == null) {
+			response.put("mensaje", "Error: no se pudo editar, el médico ID: ".concat(id.toString().concat(" no existe en la base de datos")));
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
 		}
 		
 		try {
 
-		pacienteActual.setNombre(paciente.getNombre());
-		pacienteActual.setApellidoPaterno(paciente.getApellidoPaterno());
-		pacienteActual.setApellidoMaterno(paciente.getApellidoPaterno());
-		pacienteActual.setRut(paciente.getRut());
-		pacienteActual.setFechaNacimiento(paciente.getFechaNacimiento());
-		pacienteActual.setNumeroCelular(paciente.getNumeroCelular());
-		pacienteActual.setTelefonoFijo(paciente.getTelefonoFijo());
-		pacienteActual.setRutTutor(paciente.getRutTutor());
-		pacienteActual.setNombreTutor(paciente.getNombreTutor());
-		pacienteActual.setEmailTutor(paciente.getEmailTutor());
-		pacienteActual.setSexo(paciente.getSexo());
-		pacienteActual.setPrevision(paciente.getPrevision());
-		pacienteActual.setCarnet(paciente.getCarnet());
-		pacienteActual.setRegion(paciente.getRegion());
-		pacienteActual.setComuna(paciente.getComuna());
-		pacienteActual.setNacionalidad(paciente.getNacionalidad());
+		medicoActual.setNombre(medico.getNombre());
+		medicoActual.setApellidoPaterno(medico.getApellidoPaterno());
+		medicoActual.setApellidoMaterno(medico.getApellidoPaterno());
+		medicoActual.setRut(medico.getRut());
+		medicoActual.setFechaNacimiento(medico.getFechaNacimiento());
+		medicoActual.setNumeroCelular(medico.getNumeroCelular());
+		medicoActual.setTelefonoFijo(medico.getTelefonoFijo());
+		medicoActual.setSexo(medico.getSexo());
+		medicoActual.setEspecialidad(medico.getEspecialidad());
+		medicoActual.setUsuario(medico.getUsuario());
 		
 		
-		pacienteUpdate = pacienteService.save(pacienteActual);
+		medicoUpdate = medicoService.save(medicoActual);
 		
 		} catch(DataAccessException e) {
-			response.put("mensaje", "Error al actualizar al paciente");
+			response.put("mensaje", "Error al actualizar al médico");
 			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		
-		response.put("mensaje", "El paciente ha sido actualizado con éxito!");
-		response.put("paciente", pacienteUpdate);
+		response.put("mensaje", "El médico ha sido actualizado con éxito!");
+		response.put("médico", medicoUpdate);
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
 	}
 	
-	@Secured("Médico")
-	@DeleteMapping("/pacientes/{id}")
+	@Secured("Administrador")
+	@DeleteMapping("/medicos/{id}")
 	public ResponseEntity<?> delete(@PathVariable Long id) {
 		Map<String, Object> response = new HashMap<>();
 		try {
-			Paciente paciente = pacienteService.findById(id);
-			String nombreFotoAnterior = paciente.getFoto();
+			Medico medico = medicoService.findById(id);
+			String nombreFotoAnterior = medico.getFoto();
 			
 			if(nombreFotoAnterior != null && nombreFotoAnterior.length() >0) {
 				Path rutaFotoAnterior = Paths.get("uploads").resolve(nombreFotoAnterior).toAbsolutePath();
@@ -196,25 +186,25 @@ public class PacienteRestController {
 				}
 			}
 			
-		pacienteService.delete(id);
+		medicoService.delete(id);
 		} catch(DataAccessException e) {
-			response.put("mensaje", "Error al eliminar al paciente");
+			response.put("mensaje", "Error al eliminar al médico");
 			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		
-		response.put("mensaje", "el paciente ha sido eliminado con éxito");
+		response.put("mensaje", "el médico ha sido eliminado con éxito");
 		
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
 		
 	}
 	
-	@Secured({"Médico"})
-	@PostMapping("/pacientes/upload")
+	@Secured({"Administrador"})
+	@PostMapping("/medicos/upload")
 	public ResponseEntity<?> upload(@RequestParam("file") MultipartFile file, @RequestParam("id") Long id){
 		Map<String, Object> response = new HashMap<>();
 		
-		Paciente paciente = pacienteService.findById(id);
+		Medico medico = medicoService.findById(id);
 		
 		if(!file.isEmpty()) {
 			String fileName = UUID.randomUUID().toString() + "_" + file.getOriginalFilename().replace(" ", "");
@@ -224,12 +214,12 @@ public class PacienteRestController {
 			try {
 				Files.copy(file.getInputStream(), filePath);
 			} catch (IOException e) {
-				response.put("mensaje", "Error al subir la imagen del paciente "+ fileName);
+				response.put("mensaje", "Error al subir la imagen del médico "+ fileName);
 				response.put("error", e.getMessage().concat(": ").concat(e.getCause().getMessage()));
 				return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 			}
 
-			String nombreFotoAnterior = paciente.getFoto();
+			String nombreFotoAnterior = medico.getFoto();
 			
 			if(nombreFotoAnterior != null && nombreFotoAnterior.length() >0) {
 				Path rutaFotoAnterior = Paths.get("uploads").resolve(nombreFotoAnterior).toAbsolutePath();
@@ -239,18 +229,18 @@ public class PacienteRestController {
 				}
 			}
 			
-			paciente.setFoto(fileName);
+			medico.setFoto(fileName);
 			
-			pacienteService.save(paciente);
+			medicoService.save(medico);
 			
-			response.put("paciente", paciente);
+			response.put("médico", medico);
 			response.put("mensaje", "Has subido correctamente la imagen: " + fileName);
 		}
 		
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
 	}
 	
-	@GetMapping("/uploads/pacientes/img/{nombreFoto:.+}")
+	@GetMapping("/uploads/medicos/img/{nombreFoto:.+}")
 	public ResponseEntity<Resource> verFoto(@PathVariable String nombreFoto) {
 		
 		Path filePath = Paths.get("uploads").resolve(nombreFoto).toAbsolutePath();
@@ -273,39 +263,19 @@ public class PacienteRestController {
 		return new ResponseEntity<Resource>(recurso, cabecera, HttpStatus.OK);
 	}
 	
-	@GetMapping("/pacientes/estados_civiles")
-	public List<EstadoCivil> listarEstados_civiles(){
-		return pacienteService.findAllEstados_civiles();
-	}
-	
-	@GetMapping("/pacientes/sexos")
+	@GetMapping("/medicos/sexos")
 	public List<Sexo> listarSexos(){
-		return pacienteService.findAllSexos();
+		return medicoService.findAllSexos();
 	}
 	
-	@GetMapping("/pacientes/previsiones")
-	public List<Prevision> listarPrevisiones(){
-		return pacienteService.findAllPrevisiones();
+	@GetMapping("/medicos/especialidades")
+	public List<Especialidad> listarEspecialidades(){
+		return medicoService.findAllEspecialidades();
 	}
 	
-	@GetMapping("/pacientes/carnets")
-	public List<Carnet> listarCarnets(){
-		return pacienteService.findAllCarnets();
-	}
-	
-	@GetMapping("/pacientes/regiones")
-	public List<Region> listarRegiones(){
-		return pacienteService.findAllRegiones();
-	}
-	
-	@GetMapping("/pacientes/comunas")
-	public List<Comuna> listarComunas(){
-		return pacienteService.findAllComunas();
-	}
-	
-	@GetMapping("/pacientes/nacionalidades")
-	public List<Nacionalidad> listarNacionalidades(){
-		return pacienteService.findAllNacionalidades();
+	@GetMapping("/medicos/usuarios")
+	public List<Usuario> listarUsuarios(){
+		return medicoService.findAllUsuarios();
 	}
 	
 }

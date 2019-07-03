@@ -39,63 +39,60 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.cesfam.presmo.backend.apirest.models.entity.Carnet;
-import com.cesfam.presmo.backend.apirest.models.entity.Comuna;
-import com.cesfam.presmo.backend.apirest.models.entity.EstadoCivil;
-import com.cesfam.presmo.backend.apirest.models.entity.Nacionalidad;
-import com.cesfam.presmo.backend.apirest.models.entity.Paciente;
-import com.cesfam.presmo.backend.apirest.models.entity.Prevision;
-import com.cesfam.presmo.backend.apirest.models.entity.Region;
+import com.cesfam.presmo.backend.apirest.models.entity.Farmaceutico;
 import com.cesfam.presmo.backend.apirest.models.entity.Sexo;
-import com.cesfam.presmo.backend.apirest.models.services.IPacienteService;
+import com.cesfam.presmo.backend.apirest.models.entity.Cargo;
+import com.cesfam.presmo.backend.apirest.models.entity.Farmacia;
+import com.cesfam.presmo.backend.apirest.models.entity.Usuario;
+import com.cesfam.presmo.backend.apirest.models.services.IFarmaceuticoService;
 
 @CrossOrigin(origins= {"http://localhost:4200"})
 @RestController
 @RequestMapping("/api/v1")
-public class PacienteRestController {
+public class FarmaceuticoRestController {
 	
 	@Autowired
-	private IPacienteService pacienteService;
+	private IFarmaceuticoService farmaceuticoService;
 	
 	private final Logger log = LoggerFactory.getLogger(PacienteRestController.class);
 	
-	@GetMapping("/pacientes")
-	public List<Paciente> index(){
-		return pacienteService.findAll();
+	@GetMapping("/farmaceuticos")
+	public List<Farmaceutico> index(){
+		return farmaceuticoService.findAll();
 	}
 	
-	@GetMapping("/pacientes/page/{page}")
-	public Page<Paciente> index(@PathVariable Integer page){
-		return pacienteService.findAll(PageRequest.of(page, 6));
+	@GetMapping("/farmaceuticos/page/{page}")
+	public Page<Farmaceutico> index(@PathVariable Integer page){
+		return farmaceuticoService.findAll(PageRequest.of(page, 6));
 	}
 	
-	@GetMapping("/pacientes/{id}")
+	@GetMapping("/farmaceuticos/{id}")
 	public ResponseEntity<?> show(@PathVariable Long id) {
 		
-		Paciente paciente = null;
+		Farmaceutico farmaceutico = null;
 		Map<String, Object> response = new HashMap<>();
 		try {
-			paciente = pacienteService.findById(id);
+			farmaceutico = farmaceuticoService.findById(id);
 		} catch(DataAccessException e) {
-			response.put("mensaje", "Error al buscar al paciente");
+			response.put("mensaje", "Error al buscar al farmacéutico");
 			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		
 		
-		if(paciente == null) {
-			response.put("mensaje", "El paciente ID: ".concat(id.toString().concat(" no existe en la base de datos")));
+		if(farmaceutico == null) {
+			response.put("mensaje", "El farmacéutico ID: ".concat(id.toString().concat(" no existe en la base de datos")));
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
 		}
 		
-		return new ResponseEntity<Paciente>(paciente, HttpStatus.OK);
+		return new ResponseEntity<Farmaceutico>(farmaceutico, HttpStatus.OK);
 	}
 	
-	@Secured("Médico")
-	@PostMapping("/pacientes")
-	public ResponseEntity<?> create(@Valid @RequestBody Paciente paciente, BindingResult result) {
+	@Secured("Administrador")
+	@PostMapping("/farmaceuticos")
+	public ResponseEntity<?> create(@Valid @RequestBody Farmaceutico farmaceutico, BindingResult result) {
 		
-		Paciente pacienteNew = null;
+		Farmaceutico farmaceuticoNew = null;
 		Map<String, Object> response = new HashMap<>();
 		
 		if(result.hasErrors()) {
@@ -110,24 +107,24 @@ public class PacienteRestController {
 		}
 		
 		try {
-			pacienteNew = pacienteService.save(paciente);
+			farmaceuticoNew = farmaceuticoService.save(farmaceutico);
 		} catch(DataAccessException e) {
-			response.put("mensaje", "Error al realizar el registro en la base de datos");
+			response.put("mensaje", "Error al registrar al farmacéutico en la base de datos");
 			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		
-		response.put("mensaje", "El paciente ha sido registrado con éxito!");
-		response.put("paciente", pacienteNew);
+		response.put("mensaje", "El farmacéutico ha sido registrado con éxito!");
+		response.put("farmacéutico", farmaceuticoNew);
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
 	}
 	
-	@Secured("Médico")
-	@PutMapping("/pacientes/{id}")
-	public ResponseEntity<?> update(@Valid @RequestBody Paciente paciente, BindingResult result, @PathVariable Long id) {
+	@Secured("Administrador")
+	@PutMapping("/farmaceuticos/{id}")
+	public ResponseEntity<?> update(@Valid @RequestBody Farmaceutico farmaceutico, BindingResult result, @PathVariable Long id) {
 		
-		Paciente pacienteActual = pacienteService.findById(id);
-		Paciente pacienteUpdate = null;
+		Farmaceutico farmaceuticoActual = farmaceuticoService.findById(id);
+		Farmaceutico farmaceuticoUpdate = null;
 		
 		Map<String, Object> response = new HashMap<>();
 		
@@ -142,51 +139,46 @@ public class PacienteRestController {
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.BAD_REQUEST);
 		}
 		
-		if(paciente == null) {
-			response.put("mensaje", "Error: no se pudo editar, el paciente ID: ".concat(id.toString().concat(" no existe en la base de datos")));
+		if(farmaceutico == null) {
+			response.put("mensaje", "Error: no se pudo editar, el farmacéutico ID: ".concat(id.toString().concat(" no existe en la base de datos")));
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
 		}
 		
 		try {
 
-		pacienteActual.setNombre(paciente.getNombre());
-		pacienteActual.setApellidoPaterno(paciente.getApellidoPaterno());
-		pacienteActual.setApellidoMaterno(paciente.getApellidoPaterno());
-		pacienteActual.setRut(paciente.getRut());
-		pacienteActual.setFechaNacimiento(paciente.getFechaNacimiento());
-		pacienteActual.setNumeroCelular(paciente.getNumeroCelular());
-		pacienteActual.setTelefonoFijo(paciente.getTelefonoFijo());
-		pacienteActual.setRutTutor(paciente.getRutTutor());
-		pacienteActual.setNombreTutor(paciente.getNombreTutor());
-		pacienteActual.setEmailTutor(paciente.getEmailTutor());
-		pacienteActual.setSexo(paciente.getSexo());
-		pacienteActual.setPrevision(paciente.getPrevision());
-		pacienteActual.setCarnet(paciente.getCarnet());
-		pacienteActual.setRegion(paciente.getRegion());
-		pacienteActual.setComuna(paciente.getComuna());
-		pacienteActual.setNacionalidad(paciente.getNacionalidad());
+		farmaceuticoActual.setNombre(farmaceutico.getNombre());
+		farmaceuticoActual.setApellidoPaterno(farmaceutico.getApellidoPaterno());
+		farmaceuticoActual.setApellidoMaterno(farmaceutico.getApellidoPaterno());
+		farmaceuticoActual.setRut(farmaceutico.getRut());
+		farmaceuticoActual.setFechaNacimiento(farmaceutico.getFechaNacimiento());
+		farmaceuticoActual.setNumeroCelular(farmaceutico.getNumeroCelular());
+		farmaceuticoActual.setTelefonoFijo(farmaceutico.getTelefonoFijo());
+		farmaceuticoActual.setSexo(farmaceutico.getSexo());
+		farmaceuticoActual.setCargo(farmaceutico.getCargo());
+		farmaceuticoActual.setFarmacia(farmaceutico.getFarmacia());
+		farmaceuticoActual.setUsuario(farmaceutico.getUsuario());
 		
 		
-		pacienteUpdate = pacienteService.save(pacienteActual);
+		farmaceuticoUpdate = farmaceuticoService.save(farmaceuticoActual);
 		
 		} catch(DataAccessException e) {
-			response.put("mensaje", "Error al actualizar al paciente");
+			response.put("mensaje", "Error al actualizar al farmacéutico");
 			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		
-		response.put("mensaje", "El paciente ha sido actualizado con éxito!");
-		response.put("paciente", pacienteUpdate);
+		response.put("mensaje", "El farmacéutico ha sido actualizado con éxito!");
+		response.put("farmacéutico", farmaceuticoUpdate);
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
 	}
 	
-	@Secured("Médico")
-	@DeleteMapping("/pacientes/{id}")
+	@Secured("Administrador")
+	@DeleteMapping("/farmaceuticos/{id}")
 	public ResponseEntity<?> delete(@PathVariable Long id) {
 		Map<String, Object> response = new HashMap<>();
 		try {
-			Paciente paciente = pacienteService.findById(id);
-			String nombreFotoAnterior = paciente.getFoto();
+			Farmaceutico farmaceutico = farmaceuticoService.findById(id);
+			String nombreFotoAnterior = farmaceutico.getFoto();
 			
 			if(nombreFotoAnterior != null && nombreFotoAnterior.length() >0) {
 				Path rutaFotoAnterior = Paths.get("uploads").resolve(nombreFotoAnterior).toAbsolutePath();
@@ -196,25 +188,25 @@ public class PacienteRestController {
 				}
 			}
 			
-		pacienteService.delete(id);
+		farmaceuticoService.delete(id);
 		} catch(DataAccessException e) {
-			response.put("mensaje", "Error al eliminar al paciente");
+			response.put("mensaje", "Error al eliminar al farmacéutico");
 			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		
-		response.put("mensaje", "el paciente ha sido eliminado con éxito");
+		response.put("mensaje", "el farmacéutico ha sido eliminado con éxito");
 		
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
 		
 	}
 	
-	@Secured({"Médico"})
-	@PostMapping("/pacientes/upload")
+	@Secured({"Administrador"})
+	@PostMapping("/farmaceuticos/upload")
 	public ResponseEntity<?> upload(@RequestParam("file") MultipartFile file, @RequestParam("id") Long id){
 		Map<String, Object> response = new HashMap<>();
 		
-		Paciente paciente = pacienteService.findById(id);
+		Farmaceutico farmaceutico = farmaceuticoService.findById(id);
 		
 		if(!file.isEmpty()) {
 			String fileName = UUID.randomUUID().toString() + "_" + file.getOriginalFilename().replace(" ", "");
@@ -224,12 +216,12 @@ public class PacienteRestController {
 			try {
 				Files.copy(file.getInputStream(), filePath);
 			} catch (IOException e) {
-				response.put("mensaje", "Error al subir la imagen del paciente "+ fileName);
+				response.put("mensaje", "Error al subir la imagen del farmacéutico "+ fileName);
 				response.put("error", e.getMessage().concat(": ").concat(e.getCause().getMessage()));
 				return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 			}
 
-			String nombreFotoAnterior = paciente.getFoto();
+			String nombreFotoAnterior = farmaceutico.getFoto();
 			
 			if(nombreFotoAnterior != null && nombreFotoAnterior.length() >0) {
 				Path rutaFotoAnterior = Paths.get("uploads").resolve(nombreFotoAnterior).toAbsolutePath();
@@ -239,18 +231,18 @@ public class PacienteRestController {
 				}
 			}
 			
-			paciente.setFoto(fileName);
+			farmaceutico.setFoto(fileName);
 			
-			pacienteService.save(paciente);
+			farmaceuticoService.save(farmaceutico);
 			
-			response.put("paciente", paciente);
+			response.put("farmacéutico", farmaceutico);
 			response.put("mensaje", "Has subido correctamente la imagen: " + fileName);
 		}
 		
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
 	}
 	
-	@GetMapping("/uploads/pacientes/img/{nombreFoto:.+}")
+	@GetMapping("/uploads/farmaceuticos/img/{nombreFoto:.+}")
 	public ResponseEntity<Resource> verFoto(@PathVariable String nombreFoto) {
 		
 		Path filePath = Paths.get("uploads").resolve(nombreFoto).toAbsolutePath();
@@ -273,39 +265,24 @@ public class PacienteRestController {
 		return new ResponseEntity<Resource>(recurso, cabecera, HttpStatus.OK);
 	}
 	
-	@GetMapping("/pacientes/estados_civiles")
-	public List<EstadoCivil> listarEstados_civiles(){
-		return pacienteService.findAllEstados_civiles();
-	}
-	
-	@GetMapping("/pacientes/sexos")
+	@GetMapping("/farmaceuticos/sexos")
 	public List<Sexo> listarSexos(){
-		return pacienteService.findAllSexos();
+		return farmaceuticoService.findAllSexos();
 	}
 	
-	@GetMapping("/pacientes/previsiones")
-	public List<Prevision> listarPrevisiones(){
-		return pacienteService.findAllPrevisiones();
+	@GetMapping("/farmaceuticos/cargos")
+	public List<Cargo> listarCargos(){
+		return farmaceuticoService.findAllCargos();
 	}
 	
-	@GetMapping("/pacientes/carnets")
-	public List<Carnet> listarCarnets(){
-		return pacienteService.findAllCarnets();
+	@GetMapping("/farmaceuticos/farmacias")
+	public List<Farmacia> listarFarmacias(){
+		return farmaceuticoService.findAllFarmacias();
 	}
 	
-	@GetMapping("/pacientes/regiones")
-	public List<Region> listarRegiones(){
-		return pacienteService.findAllRegiones();
-	}
-	
-	@GetMapping("/pacientes/comunas")
-	public List<Comuna> listarComunas(){
-		return pacienteService.findAllComunas();
-	}
-	
-	@GetMapping("/pacientes/nacionalidades")
-	public List<Nacionalidad> listarNacionalidades(){
-		return pacienteService.findAllNacionalidades();
+	@GetMapping("/farmaceuticos/usuarios")
+	public List<Usuario> listarUsuarios(){
+		return farmaceuticoService.findAllUsuarios();
 	}
 	
 }

@@ -72,21 +72,21 @@ public class ArticuloRestController {
 		try {
 			articulo = articuloService.findById(id);
 		} catch(DataAccessException e) {
-			response.put("mensaje", "Error al buscar el articulo");
+			response.put("mensaje", "Error al buscar el artículo");
 			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		
 		
 		if(articulo == null) {
-			response.put("mensaje", "El articulo ID: ".concat(id.toString().concat(" no existe en la base de datos")));
+			response.put("mensaje", "El artículo ID: ".concat(id.toString().concat(" no existe en la base de datos")));
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
 		}
 		
 		return new ResponseEntity<Articulo>(articulo, HttpStatus.OK);
 	}
 	
-	@Secured("Farmaceutico")
+	@Secured("Farmacéutico")
 	@PostMapping("/articulos")
 	public ResponseEntity<?> create(@Valid @RequestBody Articulo articulo, BindingResult result) {
 		
@@ -107,17 +107,17 @@ public class ArticuloRestController {
 		try {
 			articuloNew = articuloService.save(articulo);
 		} catch(DataAccessException e) {
-			response.put("mensaje", "Error al realizar el registro del articulo");
+			response.put("mensaje", "Error al realizar el registro del artículo");
 			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		
-		response.put("mensaje", "El articulo ha sido registrado con éxito!");
-		response.put("articulo", articuloNew);
+		response.put("mensaje", "El artículo ha sido registrado con éxito!");
+		response.put("artículo", articuloNew);
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
 	}
 	
-	@Secured("Farmaceutico")
+	@Secured("Farmacéutico")
 	@PutMapping("/articulos/{id}")
 	public ResponseEntity<?> update(@Valid @RequestBody Articulo articulo, BindingResult result, @PathVariable Long id) {
 		
@@ -138,7 +138,7 @@ public class ArticuloRestController {
 		}
 		
 		if(articulo == null) {
-			response.put("mensaje", "Error: no se pudo editar, el articulo ID: ".concat(id.toString().concat(" no existe en la base de datos")));
+			response.put("mensaje", "Error: no se pudo editar, el artículo ID: ".concat(id.toString().concat(" no existe en la base de datos")));
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
 		}
 		
@@ -156,17 +156,17 @@ public class ArticuloRestController {
 		articuloUpdate = articuloService.save(articuloActual);
 		
 		} catch(DataAccessException e) {
-			response.put("mensaje", "Error al actualizar el articulo");
+			response.put("mensaje", "Error al actualizar el artículo");
 			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		
-		response.put("mensaje", "El articulo ha sido actualizado con éxito!");
-		response.put("articulo", articuloUpdate);
+		response.put("mensaje", "El artículo ha sido actualizado con éxito!");
+		response.put("artículo", articuloUpdate);
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
 	}
 	
-	@Secured("Farmaceutico")
+	@Secured("Farmacéutico")
 	@DeleteMapping("/articulos/{id}")
 	public ResponseEntity<?> delete(@PathVariable Long id) {
 		Map<String, Object> response = new HashMap<>();
@@ -184,18 +184,18 @@ public class ArticuloRestController {
 			
 		articuloService.delete(id);
 		} catch(DataAccessException e) {
-			response.put("mensaje", "Error al eliminar el articulo");
+			response.put("mensaje", "Error al eliminar el artículo");
 			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		
-		response.put("mensaje", "el articulo ha sido eliminado con éxito");
+		response.put("mensaje", "el artículo ha sido eliminado con éxito");
 		
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
 		
 	}
 	
-	@Secured({"Farmaceutico", "Medico"})
+	@Secured({"Farmacéutico"})
 	@PostMapping("/articulos/upload")
 	public ResponseEntity<?> upload(@RequestParam("file") MultipartFile file, @RequestParam("id") Long id){
 		Map<String, Object> response = new HashMap<>();
@@ -210,7 +210,7 @@ public class ArticuloRestController {
 			try {
 				Files.copy(file.getInputStream(), filePath);
 			} catch (IOException e) {
-				response.put("mensaje", "Error al subir la imagen del articulo "+ fileName);
+				response.put("mensaje", "Error al subir la imagen del artículo "+ fileName);
 				response.put("error", e.getMessage().concat(": ").concat(e.getCause().getMessage()));
 				return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 			}
@@ -229,7 +229,7 @@ public class ArticuloRestController {
 			
 			articuloService.save(articulo);
 			
-			response.put("articulo", articulo);
+			response.put("artículo", articulo);
 			response.put("mensaje", "Has subido correctamente la imagen: " + fileName);
 		}
 		
