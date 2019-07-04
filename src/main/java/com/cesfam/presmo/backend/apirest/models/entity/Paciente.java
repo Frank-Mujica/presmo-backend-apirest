@@ -58,7 +58,7 @@ public class Paciente implements Serializable {
 	private int numeroCelular;
 	@Size(min = 8, max = 8, message = "el número de teléfono debe tener 8 digitos")
 	@Column(name = "telefono_fijo", nullable = true)
-	private int telefonoFijo;
+	private Integer telefonoFijo;
 	@NotEmpty(message = "El campo no puede estar vacío puede estar vacío")
 	@Size(min = 9, max = 9, message = "el rut debe tener un tamaño de 9 caracteres")
 	@Column(name = "rut_tutor", nullable = false, unique = true)
@@ -172,11 +172,11 @@ public class Paciente implements Serializable {
 		this.numeroCelular = numeroCelular;
 	}
 
-	public int getTelefonoFijo() {
+	public Integer getTelefonoFijo() {
 		return telefonoFijo;
 	}
 
-	public void setTelefonoFijo(int telefonoFijo) {
+	public void setTelefonoFijo(Integer telefonoFijo) {
 		this.telefonoFijo = telefonoFijo;
 	}
 
