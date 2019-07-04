@@ -1,14 +1,5 @@
 /*Populate Table Articulos*/
-INSERT INTO articulos (tipo_id, fabricante_id, descripcion, componentes, contenido, gramaje, stock) VALUES (1, 1, 'prueba1', 'prueba1', 'prueba1', 2, 5);
-INSERT INTO articulos (tipo_id, fabricante_id, descripcion, componentes, contenido, gramaje, stock) VALUES (1, 1, 'prueba2', 'prueba2', 'prueba2', 2, 5);
-INSERT INTO articulos (tipo_id, fabricante_id, descripcion, componentes, contenido, gramaje, stock) VALUES (1, 1, 'prueba3', 'prueba3', 'prueba3', 2, 5);
-INSERT INTO articulos (tipo_id, fabricante_id, descripcion, componentes, contenido, gramaje, stock) VALUES (1, 1, 'prueba4', 'prueba4', 'prueba4', 2, 5);
-INSERT INTO articulos (tipo_id, fabricante_id, descripcion, componentes, contenido, gramaje, stock) VALUES (1, 1, 'prueba5', 'prueba5', 'prueba5', 2, 5);
-INSERT INTO articulos (tipo_id, fabricante_id, descripcion, componentes, contenido, gramaje, stock) VALUES (1, 1, 'prueba6', 'prueba6', 'prueba6', 2, 5);
-INSERT INTO articulos (tipo_id, fabricante_id, descripcion, componentes, contenido, gramaje, stock) VALUES (1, 1, 'prueba7', 'prueba7', 'prueba7', 2, 5);
-INSERT INTO articulos (tipo_id, fabricante_id, descripcion, componentes, contenido, gramaje, stock) VALUES (1, 1, 'prueba8', 'prueba8', 'prueba8', 2, 5);
-INSERT INTO articulos (tipo_id, fabricante_id, descripcion, componentes, contenido, gramaje, stock) VALUES (1, 1, 'prueba9', 'prueba9', 'prueba9', 2, 5);
-INSERT INTO articulos (tipo_id, fabricante_id, descripcion, componentes, contenido, gramaje, stock) VALUES (1, 1, 'prueba10', 'prueba10', 'prueba10', 2, 5);
+
 
 INSERT INTO usuarios (username, nombre, apellidos, email, password, enabled) VALUES ('frank666', 'frank', 'mujica fuentealba', 'f.mujica1995@gmail.com', '$2a$10$1/FWMTqX/H4enA5s9k.ZGupTEudJhq0mk1QQMzYvRGjpdBw.nwQSu', 1);
 INSERT INTO usuarios (username, nombre, apellidos, email, password, enabled) VALUES ('suicideboy', 'suicide', 'boys', 's.boys666@gmail.com', '$2a$10$ua67IMKby8nIhNyS5LxXZezHbxz0b1zfjH13dp2gsNCnA6jxbPKg6', 1);
@@ -42,6 +33,9 @@ INSERT INTO carnets (id, sector) VALUES (3,'Verde');
 INSERT INTO tipos (id, nombre) VALUES (1,'Fármaco');
 
 INSERT INTO fabricantes (id, nombre) VALUES (1,'Laboratorio Chile');
+
+INSERT INTO articulos (descripcion, componentes, contenido, gramaje, fabricante_id, tipo_id) VALUES ('Clonazepam', 'Lactosa Monohidrato, Almidón Pregelatinizado, Celulosa Microcristalina, Estearato de Magnesio.', '30 Comprimidos.', 2.0, 1, 1);
+INSERT INTO articulos (descripcion, componentes, contenido, gramaje, fabricante_id, tipo_id) VALUES ('Alprazolam', 'Docusato de Sodio, Benzoato de Sodio, Almidón de Patata Pregelatinizado, Celulosa Microcristalina, Lactosa Monohidrato, Estearato de Magnesio, Sílice Coloidal Anhidra.', '30 Comprimidos.', 0.5, 1, 1);
 
 INSERT INTO regiones (id, nombre, nombre_ordinal) VALUES (1,'Arica y Parinacota','XV');
 INSERT INTO regiones (id, nombre, nombre_ordinal) VALUES (2,'Tarapacá','I');

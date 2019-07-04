@@ -34,7 +34,7 @@ public class Articulo implements Serializable {
 	@Column(nullable = false)
 	private String descripcion;
 	@NotEmpty(message = "El campo no puede estar vacío")
-	@Size(min=4, max=25, message="el tamaño debe estar entre 4 y 25 caracteres")
+	@Size(min=4, max=225, message="el tamaño debe estar entre 4 y 225 caracteres")
 	@Column(nullable = false)
 	private String componentes;
 	@NotEmpty(message = "El campo no puede estar vacío")
@@ -43,10 +43,11 @@ public class Articulo implements Serializable {
 	private String contenido;
 	@NotEmpty(message = "El campo no puede estar vacío")
 	@Column(nullable = false)
-	private int gramaje;
+	private float gramaje;
 	@NotEmpty(message = "El campo no puede estar vacío")
-	@Column(nullable = false)
+	@Column(nullable = false, columnDefinition="int default 0")
 	private int stock;	
+	@Column(nullable = true)
 	private String foto;
 	
 	@NotNull(message="Se debe indicar el tipo de artículo")
@@ -93,11 +94,11 @@ public class Articulo implements Serializable {
 		this.contenido = contenido;
 	}
 
-	public int getGramaje() {
+	public float getGramaje() {
 		return gramaje;
 	}
 
-	public void setGramaje(int gramaje) {
+	public void setGramaje(float gramaje) {
 		this.gramaje = gramaje;
 	}
 
