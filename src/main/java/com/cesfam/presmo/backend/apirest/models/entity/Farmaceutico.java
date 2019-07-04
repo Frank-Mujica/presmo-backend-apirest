@@ -57,7 +57,7 @@ public class Farmaceutico implements Serializable {
 	private int numeroCelular;
 	@Size(min = 8, max = 8, message = "el número de teléfono debe tener 8 digitos")
 	@Column(name = "telefono_fijo", nullable = true)
-	private int telefonoFijo;
+	private Integer telefonoFijo;
 	@Column(name = "foto_farmaceutico", nullable = true)
 	private String foto;
 
@@ -141,11 +141,11 @@ public class Farmaceutico implements Serializable {
 		this.numeroCelular = numeroCelular;
 	}
 
-	public int getTelefonoFijo() {
+	public Integer getTelefonoFijo() {
 		return telefonoFijo;
 	}
 
-	public void setTelefonoFijo(int telefonoFijo) {
+	public void setTelefonoFijo(Integer telefonoFijo) {
 		this.telefonoFijo = telefonoFijo;
 	}
 	
