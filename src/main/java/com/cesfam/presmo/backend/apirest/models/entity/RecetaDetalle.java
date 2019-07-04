@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -42,17 +43,17 @@ public class RecetaDetalle implements Serializable {
 	@Column(nullable = false)
 	private boolean permanente;
 
-	@NotNull(message = "Se debe indicar el médico que emite la receta")
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name = "medico_id")
+	@NotNull(message = "La receta debe contener una cabecera")
+	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name = "receta_detalle_id")
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
-	private Medico medico;
+	private RecetaCabecera recetaCabecera;
 
-	@NotNull(message = "Se debe indicar el paciente al cual está ligada la receta")
+	@NotNull(message = "Se deben indicar los artículos recetados")
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name = "paciente_id")
+	@JoinColumn(name = "articulo_id")
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
-	private Paciente paciente;
+	private Articulo articulo;
 
 	public Long getId() {
 		return id;
@@ -98,20 +99,20 @@ public class RecetaDetalle implements Serializable {
 		return serialVersionUID;
 	}
 
-	public Medico getMedico() {
-		return medico;
+	public RecetaCabecera getRecetaCabecera() {
+		return recetaCabecera;
 	}
 
-	public void setMedico(Medico medico) {
-		this.medico = medico;
+	public void setRecetaCabecera(RecetaCabecera recetaCabecera) {
+		this.recetaCabecera = recetaCabecera;
 	}
 
-	public Paciente getPaciente() {
-		return paciente;
+	public Articulo getArticulo() {
+		return articulo;
 	}
 
-	public void setPaciente(Paciente paciente) {
-		this.paciente = paciente;
+	public void setArticulo(Articulo articulo) {
+		this.articulo = articulo;
 	}
 
 }

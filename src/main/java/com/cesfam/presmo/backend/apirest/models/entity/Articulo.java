@@ -47,7 +47,7 @@ public class Articulo implements Serializable {
 	@NotEmpty(message = "El campo no puede estar vacío")
 	@Column(nullable = false, columnDefinition="int default 0")
 	private int stock;	
-	@Column(nullable = true)
+	@Column(name = "foto_articulo", nullable = true)
 	private String foto;
 	
 	@NotNull(message="Se debe indicar el tipo de artículo")

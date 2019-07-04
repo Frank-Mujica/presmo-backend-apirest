@@ -17,7 +17,6 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "usuarios")
@@ -32,14 +31,6 @@ public class Usuario implements Serializable {
 	private Long id;
 	@Column(unique = true, length = 20)
 	private String username;
-	@NotEmpty(message = "no puede estar vacío")
-	@Size(min = 4, max = 30, message = "el tamaño debe estar entre 4 y 30 caracteres")
-	@Column(length = 30, nullable = false)
-	private String nombre;
-	@NotEmpty(message = "no puede estar vacío")
-	@Size(min = 4, max = 50, message = "el tamaño debe estar entre 4 y 50 caracteres")
-	@Column(length = 50, nullable = false)
-	private String apellidos;
 	@NotEmpty(message = "no puede estar vacío")
 	@Email(message = "debe contener una dirección de correo electrónico valida")
 	@Column(unique = true, nullable = false)
@@ -69,22 +60,6 @@ public class Usuario implements Serializable {
 
 	public void setUsername(String username) {
 		this.username = username;
-	}
-
-	public String getNombre() {
-		return nombre;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
-	public String getApellidos() {
-		return apellidos;
-	}
-
-	public void setApellidos(String apellidos) {
-		this.apellidos = apellidos;
 	}
 
 	public String getEmail() {

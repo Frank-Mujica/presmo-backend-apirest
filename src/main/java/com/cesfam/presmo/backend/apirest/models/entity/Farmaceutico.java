@@ -18,6 +18,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
@@ -37,17 +38,18 @@ public class Farmaceutico implements Serializable {
 	private String nombre;
 	@NotEmpty(message = "no puede estar vacío")
 	@Size(min = 4, max = 50, message = "el tamaño debe estar entre 4 y 50 caracteres")
-	@Column(length = 50, nullable = false)
+	@Column(name = "apellido_paterno", length = 50, nullable = false)
 	private String apellidoPaterno;
 	@NotEmpty(message = "no puede estar vacío")
 	@Size(min = 4, max = 50, message = "el tamaño debe estar entre 4 y 50 caracteres")
-	@Column(length = 50, nullable = false)
+	@Column(name = " apellido_materno",length = 50, nullable = false)
 	private String apellidoMaterno;
 	@NotEmpty(message = "no puede estar vacío")
 	@Column(unique = true, nullable = false)
 	private String rut;
 	@NotEmpty(message = "El campo no puede estar vacío")
 	@Column(name = "fecha_nacimiento", nullable = false)
+	@JsonFormat(pattern="dd/mm/yyyy")
 	private Date fechaNacimiento;
 	@NotEmpty(message = "El campo no puede estar vacío")
 	@Size(min = 8, max = 8, message = "el número de celular debe tener 8 digitos")
@@ -56,6 +58,7 @@ public class Farmaceutico implements Serializable {
 	@Size(min = 8, max = 8, message = "el número de teléfono debe tener 8 digitos")
 	@Column(name = "telefono_fijo", nullable = true)
 	private int telefonoFijo;
+	@Column(name = "foto_farmaceutico", nullable = true)
 	private String foto;
 
 	@NotNull(message = "Se debe indicar el sexo del farmacéutico")

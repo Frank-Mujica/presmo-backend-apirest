@@ -18,6 +18,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
@@ -49,6 +50,7 @@ public class Paciente implements Serializable {
 	private String rut;
 	@NotEmpty(message = "El campo no puede estar vacío")
 	@Column(name = "fecha_nacimiento", nullable = false)
+	@JsonFormat(pattern="dd/mm/yyyy")
 	private Date fechaNacimiento;
 	@NotEmpty(message = "El campo no puede estar vacío")
 	@Size(min = 8, max = 8, message = "el número de celular debe tener 8 digitos")
@@ -69,6 +71,7 @@ public class Paciente implements Serializable {
 	@Email(message = "debe contener una dirección de correo electrónico valida")
 	@Column(name = "email_tutor", unique = true, nullable = false)
 	private String emailTutor;
+	@Column(name = "foto_paciente", nullable = true)
 	private String foto;
 	
 	@NotNull(message="Se debe indicar el estado civil del paciente")

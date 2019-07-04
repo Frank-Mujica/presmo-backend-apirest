@@ -20,7 +20,7 @@ public class Fabricante implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@Column(name = "nombre_fabricante")
+	@Column(name = "fabricante")
 	private String nombre;
 	
 	public Long getId() {
