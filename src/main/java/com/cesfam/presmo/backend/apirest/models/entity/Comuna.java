@@ -27,6 +27,11 @@ public class Comuna implements Serializable{
 	private Long id;
 	private String nombre;
 	
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name="region_id")
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	private Region region;
+	
 	public Long getId() {
 		return id;
 	}
@@ -40,10 +45,12 @@ public class Comuna implements Serializable{
 		this.nombre = nombre;
 	}
 	
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name="region_id")
-	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-	private Region region;
+	public Region getRegion() {
+		return region;
+	}
+	public void setRegion(Region region) {
+		this.region = region;
+	}
 
 }
 
