@@ -1,5 +1,5 @@
-INSERT INTO roles (id, nombre) VALUES (1,'Médico');
-INSERT INTO roles (id, nombre) VALUES (2,'Farmacéutico');
+INSERT INTO roles (id, nombre) VALUES (1,'Medico');
+INSERT INTO roles (id, nombre) VALUES (2,'Farmaceutico');
 INSERT INTO roles (id, nombre) VALUES (3,'Administrador');
 
 INSERT INTO usuarios_roles (usuario_id, role_id) VALUES (1, 1);
