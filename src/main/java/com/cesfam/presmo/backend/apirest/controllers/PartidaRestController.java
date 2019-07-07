@@ -1,29 +1,45 @@
 package com.cesfam.presmo.backend.apirest.controllers;
 
+import java.io.File;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.cesfam.presmo.backend.apirest.models.entity.Articulo;
 import com.cesfam.presmo.backend.apirest.models.entity.Partida;
+import com.cesfam.presmo.backend.apirest.models.entity.Tipo;
 import com.cesfam.presmo.backend.apirest.models.services.IPartidaService;
 
 @CrossOrigin(origins= {"http://localhost:4200"})
@@ -97,6 +113,78 @@ public class PartidaRestController {
 		response.put("mensaje", "El partida ha sido registrada con éxito!");
 		response.put("partida", partidaNew);
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
+	}
+	
+	@Secured("ROLE_FARMACEUTICO")
+	@PutMapping("/partidas/{id}")
+	public ResponseEntity<?> update(@Valid @RequestBody Partida partida, BindingResult result, @PathVariable Long id) {
+		
+		Partida partidaActual = partidaService.findById(id);
+		Partida partidaUpdate = null;
+		
+		Map<String, Object> response = new HashMap<>();
+		
+		if(result.hasErrors()) {
+			
+			List<String> errors = result.getFieldErrors()
+					.stream()
+					.map(err -> err.getField() + "' " + err.getDefaultMessage())
+					.collect(Collectors.toList());
+			
+			response.put("errors", errors);
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.BAD_REQUEST);
+		}
+		
+		if(partida == null) {
+			response.put("mensaje", "Error: no se pudo editar, la partida ID: ".concat(id.toString().concat(" no se encuentra registrada")));
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
+		}
+		
+		try {
+
+		partidaActual.setFechaPartida(partida.getFechaPartida());
+		partidaActual.setCantidadLlegada(partida.getCantidadLlegada());
+		partidaActual.setCantidadRestante(partida.getCantidadRestante());
+		partidaActual.setArticulo(partida.getArticulo());
+		
+		
+		partidaUpdate = partidaService.save(partidaActual);
+		
+		} catch(DataAccessException e) {
+			response.put("mensaje", "Error al actualizar la partida");
+			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
+		response.put("mensaje", "La partida ha sido actualizada con éxito!");
+		response.put("partida", partidaUpdate);
+		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
+	}
+	
+	@Secured("ROLE_FARMACEUTICO")
+	@DeleteMapping("/partidas/{id}")
+	public ResponseEntity<?> delete(@PathVariable Long id) {
+		Map<String, Object> response = new HashMap<>();
+		try {
+			
+			partidaService.findById(id);
+			
+		partidaService.delete(id);
+		} catch(DataAccessException e) {
+			response.put("mensaje", "Error al eliminar la partida");
+			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
+		response.put("mensaje", "La partida ha sido eliminada con éxito!");
+		
+		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
+		
+	}
+	
+	@GetMapping("/partidas/articulos")
+	public List<Articulo> listarArticulos(){
+		return partidaService.findAllArticulos();
 	}
 	
 }

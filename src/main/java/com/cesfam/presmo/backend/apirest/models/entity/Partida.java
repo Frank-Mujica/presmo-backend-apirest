@@ -30,10 +30,10 @@ public class Partida {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	@NotNull(message = "El campo no puede estar vacío")
-	@Column(name = "fecha_nacimiento", nullable = false)
+	@Column(name = "fecha_partida", nullable = false)
 	@JsonFormat(pattern= "dd/MM/yyyy")
 	@Temporal(TemporalType.DATE)
-	private Date fechaNacimiento;
+	private Date fechaPartida;
 	@NotNull(message = "El campo no puede estar vacío")
 	@Column(name = "cantidad_llegada", nullable = false)
 	private int cantidadLlegada;
@@ -54,12 +54,12 @@ public class Partida {
 		this.id = id;
 	}
 
-	public Date getFechaNacimiento() {
-		return fechaNacimiento;
+	public Date getFechaPartida() {
+		return fechaPartida;
 	}
 
-	public void setFechaNacimiento(Date fechaNacimiento) {
-		this.fechaNacimiento = fechaNacimiento;
+	public void setFechaPartida(Date fechaPartida) {
+		this.fechaPartida = fechaPartida;
 	}
 
 	public int getCantidadLlegada() {
