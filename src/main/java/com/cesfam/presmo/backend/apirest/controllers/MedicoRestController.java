@@ -98,17 +98,17 @@ public class MedicoRestController {
 			
 			List<String> errors = result.getFieldErrors()
 					.stream()
-					.map(err -> "El campo '" + err.getField() + "' " + err.getDefaultMessage())
+					.map(err -> err.getField() + "' " + err.getDefaultMessage())
 					.collect(Collectors.toList());
 			
-			response.put("errors", errors);
+			response.put("errores", errors);
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.BAD_REQUEST);
 		}
 		
 		try {
 			medicoNew = medicoService.save(medico);
 		} catch(DataAccessException e) {
-			response.put("mensaje", "Error al registrar al médico en la base de datos");
+			response.put("mensaje", "Error al registrar al médico");
 			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 		}

@@ -69,13 +69,13 @@ public class PacienteRestController {
 		return pacienteService.findAll(PageRequest.of(page, 6));
 	}
 	
-	@GetMapping("/pacientes/{id}")
-	public ResponseEntity<?> show(@PathVariable Long id) {
+	@GetMapping("/pacientes/{rut}")
+	public ResponseEntity<?> show(@PathVariable String rut) {
 		
 		Paciente paciente = null;
 		Map<String, Object> response = new HashMap<>();
 		try {
-			paciente = pacienteService.findById(id);
+			paciente = pacienteService.findByRut(rut);
 		} catch(DataAccessException e) {
 			response.put("mensaje", "Error al buscar al paciente");
 			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
@@ -84,7 +84,7 @@ public class PacienteRestController {
 		
 		
 		if(paciente == null) {
-			response.put("mensaje", "El paciente ID: ".concat(id.toString().concat(" no se encuentra registrado")));
+			response.put("mensaje", "El paciente Rut: ".concat(rut.toString().concat(" no se encuentra registrado")));
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
 		}
 		
@@ -143,7 +143,7 @@ public class PacienteRestController {
 		}
 		
 		if(paciente == null) {
-			response.put("mensaje", "Error: no se pudo editar, el paciente ID: ".concat(id.toString().concat(" no se encuentra registrado")));
+			response.put("mensaje", "Error: no se pudo editar, el paciente ID: ".concat(id.toString().concat(" no existe en la base de datos")));
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
 		}
 		

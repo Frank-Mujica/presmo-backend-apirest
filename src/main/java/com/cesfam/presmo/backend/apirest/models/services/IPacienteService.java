@@ -22,6 +22,8 @@ public interface IPacienteService {
 	
 	public Paciente findById(Long id);
 	
+	public Paciente findByRut(String rut);
+	
 	public Paciente save(Paciente paciente);
 	
 	public void delete (Long id);

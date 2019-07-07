@@ -88,7 +88,7 @@ public class FarmaceuticoRestController {
 		return new ResponseEntity<Farmaceutico>(farmaceutico, HttpStatus.OK);
 	}
 	
-	@Secured("Administrador")
+	@Secured("ROLE_ADMIN")
 	@PostMapping("/farmaceuticos")
 	public ResponseEntity<?> create(@Valid @RequestBody Farmaceutico farmaceutico, BindingResult result) {
 		
@@ -119,7 +119,7 @@ public class FarmaceuticoRestController {
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
 	}
 	
-	@Secured("Administrador")
+	@Secured("ROLE_ADMIN")
 	@PutMapping("/farmaceuticos/{id}")
 	public ResponseEntity<?> update(@Valid @RequestBody Farmaceutico farmaceutico, BindingResult result, @PathVariable Long id) {
 		
@@ -172,7 +172,7 @@ public class FarmaceuticoRestController {
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
 	}
 	
-	@Secured("Administrador")
+	@Secured("ROLE_ADMIN")
 	@DeleteMapping("/farmaceuticos/{id}")
 	public ResponseEntity<?> delete(@PathVariable Long id) {
 		Map<String, Object> response = new HashMap<>();
@@ -201,7 +201,7 @@ public class FarmaceuticoRestController {
 		
 	}
 	
-	@Secured({"Administrador"})
+	@Secured({"ROLE_ADMIN"})
 	@PostMapping("/farmaceuticos/upload")
 	public ResponseEntity<?> upload(@RequestParam("file") MultipartFile file, @RequestParam("id") Long id){
 		Map<String, Object> response = new HashMap<>();

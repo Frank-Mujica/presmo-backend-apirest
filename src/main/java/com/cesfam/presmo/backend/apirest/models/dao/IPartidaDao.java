@@ -6,16 +6,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import com.cesfam.presmo.backend.apirest.models.entity.Articulo;
-import com.cesfam.presmo.backend.apirest.models.entity.RecetaCabecera;
-import com.cesfam.presmo.backend.apirest.models.entity.RecetaDetalle;
+import com.cesfam.presmo.backend.apirest.models.entity.Partida;
 
-public interface IRecetaDetalleDao  extends JpaRepository<RecetaDetalle, Long>{
-	
+public interface IPartidaDao extends JpaRepository<Partida, Long>{
+
 	@Query("from Articulo")
 	public List<Articulo> findAllArticulos(); 
-
-	@Query("from RecetaCabecera")
-	public List<RecetaCabecera> findAllReceta_Cabecera(); 
-	
 }
-

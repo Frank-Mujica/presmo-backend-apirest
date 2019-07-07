@@ -42,6 +42,12 @@ public class PacienteServiceImpl implements IPacienteService{
 		return pacienteDao.findById(id).orElse(null);
 	}
 	@Override
+	@Transactional(readOnly=true)
+	public Paciente findByRut(String rut) {
+		// TODO Auto-generated method stub
+		return pacienteDao.findByRut(rut);
+	}
+	@Override
 	@Transactional
 	public Paciente save(Paciente paciente) {
 		// TODO Auto-generated method stub

@@ -64,17 +64,14 @@ public class Paciente implements Serializable {
 	@Size(min = 8, max = 9, message = "El número de teléfono debe contener de 8 a 9 caracteres númericos")
 	@Column(name = "telefono_fijo", nullable = true)
 	private String telefonoFijo;
-	@NotEmpty(message = "El campo no puede estar vacío puede estar vacío")
 	@Size(min = 9, max = 12, message = "el rut debe tener un tamaño de 9 caracteres")
-	@Column(name = "rut_tutor", nullable = false, unique = true)
+	@Column(name = "rut_tutor", nullable = true)
 	private String rutTutor;
-	@NotEmpty(message = "El campo no puede estar vacío")
 	@Size(min = 4, max = 50, message = "el tamaño debe estar entre 4 y 50 caracteres")
-	@Column(name = "nombre_tutor", nullable = false)
+	@Column(name = "nombre_tutor", nullable = true)
 	private String nombreTutor;
-	@NotEmpty(message = "El campo no puede estar vacío")
 	@Email(message = "debe contener una dirección de correo electrónico valida")
-	@Column(name = "email_tutor", unique = true, nullable = false)
+	@Column(name = "email_tutor", unique = true, nullable = true)
 	private String emailTutor;
 	@Column(name = "foto_paciente", nullable = true)
 	private String foto;

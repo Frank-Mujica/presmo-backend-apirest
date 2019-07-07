@@ -25,9 +25,11 @@ INSERT INTO fabricantes (id, fabricante) VALUES (1, 'Laboratorio Chile');
 
 INSERT INTO usuarios (username, email, password, enabled) VALUES ('f.mujica', 'f.mujica1995@gmail.com', '$2a$10$1/FWMTqX/H4enA5s9k.ZGupTEudJhq0mk1QQMzYvRGjpdBw.nwQSu', 1);
 INSERT INTO usuarios (username, email, password, enabled) VALUES ('suicideboy', 's.boys666@gmail.com', '$2a$10$ua67IMKby8nIhNyS5LxXZezHbxz0b1zfjH13dp2gsNCnA6jxbPKg6', 1);
+INSERT INTO usuarios (username, email, password, enabled) VALUES ('suicide', 'suicide@gmail.com', '$2a$10$z0wQtklQDWLQwZ86bb.Q/e2PD6CnC4kFszC/FHqdepy5zqO3J2q1O', 1);
 
 INSERT INTO usuarios_roles (usuario_id, role_id) VALUES (1, 1);
 INSERT INTO usuarios_roles (usuario_id, role_id) VALUES (2, 2);
+INSERT INTO usuarios_roles (usuario_id, role_id) VALUES (3, 3);
 
 INSERT INTO medicos (nombre, apellido_paterno, apellido_materno, rut, fecha_nacimiento, numero_celular, especialidad_id, sexo_id, usuario_id) VALUES ('Frank', 'Mujica', 'Fuentealba', '19.226.507-k', '1995-08-08', 87059085, 1, 1, 2);
 

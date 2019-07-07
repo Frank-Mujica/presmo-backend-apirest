@@ -16,6 +16,8 @@ import com.cesfam.presmo.backend.apirest.models.entity.Sexo;
 
 public interface IPacienteDao extends JpaRepository<Paciente, Long>{
 
+	public Paciente findByRut(String rut);
+	
 	@Query("from EstadoCivil")
 	public List<EstadoCivil> findAllEstados_civiles(); 
 	
@@ -35,6 +37,6 @@ public interface IPacienteDao extends JpaRepository<Paciente, Long>{
 	public List<Comuna> findAllComunas(); 
 	
 	@Query("from Nacionalidad")
-	public List<Nacionalidad> findAllNacionalidades(); 
+	public List<Nacionalidad> findAllNacionalidades();
 	
 }

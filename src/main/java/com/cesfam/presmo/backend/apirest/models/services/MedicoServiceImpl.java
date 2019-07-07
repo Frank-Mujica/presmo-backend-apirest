@@ -70,6 +70,7 @@ public class MedicoServiceImpl implements IMedicoService {
 	}
 
 	@Override
+	@Transactional
 	public List<Usuario> findAllUsuarios() {
 		// TODO Auto-generated method stub
 		return medicoDao.findAllUsuarios();

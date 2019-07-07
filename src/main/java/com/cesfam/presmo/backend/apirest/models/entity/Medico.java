@@ -21,9 +21,6 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-/*import org.springframework.format.annotation.DateTimeFormat;
-
-import com.fasterxml.jackson.annotation.JsonFormat;*/
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
@@ -52,7 +49,7 @@ public class Medico implements Serializable {
 	@NotEmpty(message = "no puede estar vacío")
 	@Column(unique = true, nullable = false)
 	private String rut;
-	@NotEmpty(message = "El campo no puede estar vacío")
+	@NotNull(message = "El campo no puede estar vacío")
 	@Column(name = "fecha_nacimiento", nullable = false)
 	@JsonFormat(pattern= "dd/MM/yyyy")
 	@Temporal(TemporalType.DATE)
