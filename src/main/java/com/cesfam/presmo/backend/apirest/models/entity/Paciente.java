@@ -50,7 +50,7 @@ public class Paciente implements Serializable {
 	private String rut;
 	@NotEmpty(message = "El campo no puede estar vacío")
 	@Column(name = "fecha_nacimiento", nullable = false)
-	@JsonFormat(pattern="dd/mm/yyyy")
+	/*@JsonFormat(pattern="dd/mm/yyyy")*/
 	private Date fechaNacimiento;
 	@NotEmpty(message = "El campo no puede estar vacío")
 	@Size(min = 8, max = 8, message = "el número de celular debe tener 8 digitos")
@@ -60,7 +60,7 @@ public class Paciente implements Serializable {
 	@Column(name = "telefono_fijo", nullable = true)
 	private Integer telefonoFijo;
 	@NotEmpty(message = "El campo no puede estar vacío puede estar vacío")
-	@Size(min = 9, max = 9, message = "el rut debe tener un tamaño de 9 caracteres")
+	@Size(min = 9, max = 12, message = "el rut debe tener un tamaño de 9 caracteres")
 	@Column(name = "rut_tutor", nullable = false, unique = true)
 	private String rutTutor;
 	@NotEmpty(message = "El campo no puede estar vacío")
@@ -86,7 +86,7 @@ public class Paciente implements Serializable {
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private Sexo sexo;
 	
-	@NotNull(message="Se debe indicar el tipo de previsión del paciente")
+	@NotNull(message="Se debe indicar el sexo del paciente")
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name="prevision_id")
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})

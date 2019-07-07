@@ -8,8 +8,6 @@ INSERT INTO usuarios_roles (usuario_id, role_id) VALUES (3, 3);
 INSERT INTO usuarios_roles (usuario_id, role_id) VALUES (3, 2);
 INSERT INTO usuarios_roles (usuario_id, role_id) VALUES (3, 1);
 
-INSERT INTO medicos (nombre, apellido_paterno, apellido_materno, rut, fecha_nacimiento, numero_celular, especialidad_id, sexo_id, usuario_id) VALUES ('Frank', 'Mujica', 'Fuentealba', '19.226.507-k', '1995-08-08', 87059085, 1, 1, 1);
-
 INSERT INTO estados_civiles (id, estado_civil) VALUES (1,'Soltero');
 INSERT INTO estados_civiles (id, estado_civil) VALUES (2,'Casado');
 INSERT INTO estados_civiles (id, estado_civil) VALUES (3,'Separado');
@@ -34,7 +32,13 @@ INSERT INTO fabricantes (id, fabricante) VALUES (1, 'Laboratorio Chile');
 INSERT INTO usuarios (username, email, password, enabled) VALUES ('f.mujica', 'f.mujica1995@gmail.com', '$2a$10$1/FWMTqX/H4enA5s9k.ZGupTEudJhq0mk1QQMzYvRGjpdBw.nwQSu', 1);
 INSERT INTO usuarios (username, email, password, enabled) VALUES ('suicideboy', 's.boys666@gmail.com', '$2a$10$ua67IMKby8nIhNyS5LxXZezHbxz0b1zfjH13dp2gsNCnA6jxbPKg6', 1);
 
-INSERT INTO medicos (nombre, apellido_paterno, apellido_materno, rut, fecha_nacimiento, numero_celular, especialidad_id, sexo_id, usuario_id) VALUES ('Frank', 'Mujica', 'Fuentealba', '19.226.507-k', '1995-08-08', 87059085, 1, 1, 1);
+INSERT INTO usuarios_roles (usuario_id, role_id) VALUES (1, 1);
+INSERT INTO usuarios_roles (usuario_id, role_id) VALUES (2, 2);
+INSERT INTO usuarios_roles (usuario_id, role_id) VALUES (3, 3);
+INSERT INTO usuarios_roles (usuario_id, role_id) VALUES (3, 2);
+INSERT INTO usuarios_roles (usuario_id, role_id) VALUES (3, 1);
+
+INSERT INTO medicos (nombre, apellido_paterno, apellido_materno, rut, fecha_nacimiento, numero_celular, especialidad_id, sexo_id, usuario_id) VALUES ('Frank', 'Mujica', 'Fuentealba', '19.226.507-k', '1995-08-08', 87059085, 1, 1, 2);
 
 INSERT INTO articulos (descripcion, componentes, contenido, gramaje, fabricante_id, tipo_id) VALUES ('Clonazepam', 'Lactosa Monohidrato, Almidón Pregelatinizado, Celulosa Microcristalina, Estearato de Magnesio.', '30 Comprimidos.', 2.0, 1, 1);
 INSERT INTO articulos (descripcion, componentes, contenido, gramaje, fabricante_id, tipo_id) VALUES ('Alprazolam', 'Docusato de Sodio, Benzoato de Sodio, Almidón de Patata Pregelatinizado, Celulosa Microcristalina, Lactosa Monohidrato, Estearato de Magnesio, Sílice Coloidal Anhidra.', '30 Comprimidos.', 0.5, 1, 1);

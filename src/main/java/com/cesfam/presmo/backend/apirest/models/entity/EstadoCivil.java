@@ -11,7 +11,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "estados_civiles")
-public class EstadoCivil implements Serializable{
+public class EstadoCivil implements Serializable {
 
 	/**
 	 * 
@@ -22,16 +22,19 @@ public class EstadoCivil implements Serializable{
 	private Long id;
 	@Column(name = "estado_civil")
 	private String nombre;
-	
+
 	public Long getId() {
 		return id;
 	}
+
 	public void setId(Long id) {
 		this.id = id;
 	}
+
 	public String getNombre() {
 		return nombre;
 	}
+
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}

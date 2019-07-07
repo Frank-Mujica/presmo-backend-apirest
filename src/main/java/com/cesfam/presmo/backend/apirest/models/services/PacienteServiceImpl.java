@@ -43,9 +43,9 @@ public class PacienteServiceImpl implements IPacienteService{
 	}
 	@Override
 	@Transactional
-	public Paciente save(Paciente articulo) {
+	public Paciente save(Paciente paciente) {
 		// TODO Auto-generated method stub
-		return pacienteDao.save(articulo);
+		return pacienteDao.save(paciente);
 	}
 	@Override
 	@Transactional

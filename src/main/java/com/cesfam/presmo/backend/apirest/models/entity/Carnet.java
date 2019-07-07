@@ -27,7 +27,7 @@ public class Carnet implements Serializable{
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public String getNombre() {
+	public String getSector() {
 		return sector;
 	}
 	public void setSector(String sector) {
