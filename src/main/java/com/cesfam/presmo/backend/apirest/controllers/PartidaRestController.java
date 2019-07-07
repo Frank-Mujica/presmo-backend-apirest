@@ -127,11 +127,7 @@ public class PartidaRestController {
 		
 		try {
 
-		partidaActual.setFechaPartida(partida.getFechaPartida());
-		partidaActual.setCantidadLlegada(partida.getCantidadLlegada());
 		partidaActual.setCantidadRestante(partida.getCantidadRestante());
-		partidaActual.setArticulo(partida.getArticulo());
-		
 		
 		partidaUpdate = partidaService.save(partidaActual);
 		
