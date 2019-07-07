@@ -21,7 +21,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter{
 
 	@Override
 	public void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().antMatchers(HttpMethod.GET,"/api/v1/articulos", "/api/v1/articulos/**", "/api/v1/pacientes", "/api/v1/pacientes/**", "/api/v1/articulos/page/**", "/api/v1/uploads/img/**", "/images/**").permitAll()
+		http.authorizeRequests().antMatchers(HttpMethod.GET,"/api/v1/articulos", "/api/v1/articulos/**", "/api/v1/articulos/page/**", "/api/v1/pacientes", "/api/v1/pacientes/**","/api/v1/partidas", "/api/v1/partidas/**", "/api/v1/partidas/page/**", "/api/v1/uploads/img/**", "/images/**").permitAll()
 		/*.antMatchers(HttpMethod.GET, "/api/v1/articulos/{id}").hasAnyRole("USER", "ADMIN")
 		.antMatchers(HttpMethod.POST, "/api/v1/articulos").hasRole("ADMIN")
 		.antMatchers("/api/v1/articulos/**").hasRole("ADMIN")*/
@@ -33,7 +33,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter{
 	public CorsConfigurationSource corsConfigurationSource() {
 		CorsConfiguration config = new CorsConfiguration(); 
 		config.setAllowedOrigins(Arrays.asList("http://localhost:4200"));
-		config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+		config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
 		config.setAllowCredentials(true);
 		config.setAllowedHeaders(Arrays.asList("Content-Type", "Authorization"));
 		

@@ -130,7 +130,7 @@ public class ArticuloRestController {
 			
 			List<String> errors = result.getFieldErrors()
 					.stream()
-					.map(err -> "El campo '" + err.getField() + "' " + err.getDefaultMessage())
+					.map(err -> err.getField() + "' " + err.getDefaultMessage())
 					.collect(Collectors.toList());
 			
 			response.put("errors", errors);
@@ -144,14 +144,7 @@ public class ArticuloRestController {
 		
 		try {
 
-		articuloActual.setDescripcion(articulo.getDescripcion());
-		articuloActual.setComponentes(articulo.getComponentes());
-		articuloActual.setContenido(articulo.getContenido());
-		articuloActual.setGramaje(articulo.getGramaje());
 		articuloActual.setStock(articulo.getStock());
-		articuloActual.setTipo(articulo.getTipo());
-		articuloActual.setFabricante(articulo.getFabricante());
-		
 		
 		articuloUpdate = articuloService.save(articuloActual);
 		

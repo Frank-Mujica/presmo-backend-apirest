@@ -38,7 +38,7 @@ public class Partida {
 	@Column(name = "cantidad_llegada", nullable = false)
 	private int cantidadLlegada;
 	@Column(name = "cantidad_restante", nullable = false)
-	private int cantidadRestante = cantidadLlegada;
+	private int cantidadRestante;
 	
 	@NotNull(message = "Se deben indicar los artículos recetados")
 	@ManyToOne(fetch = FetchType.LAZY)
