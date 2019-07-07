@@ -84,7 +84,7 @@ public class PacienteRestController {
 		
 		
 		if(paciente == null) {
-			response.put("mensaje", "El paciente ID: ".concat(id.toString().concat(" no existe en la base de datos")));
+			response.put("mensaje", "El paciente ID: ".concat(id.toString().concat(" no se encuentra registrado")));
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
 		}
 		
@@ -112,7 +112,7 @@ public class PacienteRestController {
 		try {
 			pacienteNew = pacienteService.save(paciente);
 		} catch(DataAccessException e) {
-			response.put("mensaje", "Error al realizar el registrar al paciente en la base de datos");
+			response.put("mensaje", "Error al realizar el registro del paciente");
 			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
@@ -143,7 +143,7 @@ public class PacienteRestController {
 		}
 		
 		if(paciente == null) {
-			response.put("mensaje", "Error: no se pudo editar, el paciente ID: ".concat(id.toString().concat(" no existe en la base de datos")));
+			response.put("mensaje", "Error: no se pudo editar, el paciente ID: ".concat(id.toString().concat(" no se encuentra registrado")));
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
 		}
 		

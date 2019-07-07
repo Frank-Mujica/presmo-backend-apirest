@@ -79,7 +79,7 @@ public class ArticuloRestController {
 		
 		
 		if(articulo == null) {
-			response.put("mensaje", "El artículo ID: ".concat(id.toString().concat(" no existe en la base de datos")));
+			response.put("mensaje", "El artículo ID: ".concat(id.toString().concat(" no se encuentra registrado")));
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
 		}
 		
@@ -138,7 +138,7 @@ public class ArticuloRestController {
 		}
 		
 		if(articulo == null) {
-			response.put("mensaje", "Error: no se pudo editar, el artículo ID: ".concat(id.toString().concat(" no existe en la base de datos")));
+			response.put("mensaje", "Error: no se pudo editar, el artículo ID: ".concat(id.toString().concat(" no se encuentra registrado")));
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
 		}
 		
@@ -189,7 +189,7 @@ public class ArticuloRestController {
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		
-		response.put("mensaje", "el artículo ha sido eliminado con éxito");
+		response.put("mensaje", "el artículo ha sido eliminado con éxito!");
 		
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
 		

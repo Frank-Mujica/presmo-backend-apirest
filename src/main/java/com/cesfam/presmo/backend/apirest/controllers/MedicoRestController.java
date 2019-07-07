@@ -80,7 +80,7 @@ public class MedicoRestController {
 		
 		
 		if(medico == null) {
-			response.put("mensaje", "El médico ID: ".concat(id.toString().concat(" no existe en la base de datos")));
+			response.put("mensaje", "El médico ID: ".concat(id.toString().concat(" no se encuentra registrado")));
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
 		}
 		
@@ -139,7 +139,7 @@ public class MedicoRestController {
 		}
 		
 		if(medico == null) {
-			response.put("mensaje", "Error: no se pudo editar, el médico ID: ".concat(id.toString().concat(" no existe en la base de datos")));
+			response.put("mensaje", "Error: no se pudo editar, el médico ID: ".concat(id.toString().concat(" no se encuentra registrado")));
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
 		}
 		
@@ -193,7 +193,7 @@ public class MedicoRestController {
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		
-		response.put("mensaje", "el médico ha sido eliminado con éxito");
+		response.put("mensaje", "el médico ha sido eliminado con éxito!");
 		
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
 		
