@@ -1,12 +1,6 @@
-INSERT INTO roles (id, nombre) VALUES (1,'Medico');
-INSERT INTO roles (id, nombre) VALUES (2,'Farmaceutico');
-INSERT INTO roles (id, nombre) VALUES (3,'Administrador');
-
-INSERT INTO usuarios_roles (usuario_id, role_id) VALUES (1, 1);
-INSERT INTO usuarios_roles (usuario_id, role_id) VALUES (2, 2);
-INSERT INTO usuarios_roles (usuario_id, role_id) VALUES (3, 3);
-INSERT INTO usuarios_roles (usuario_id, role_id) VALUES (3, 2);
-INSERT INTO usuarios_roles (usuario_id, role_id) VALUES (3, 1);
+INSERT INTO roles (id, nombre) VALUES (1,'ROLE_MEDICO');
+INSERT INTO roles (id, nombre) VALUES (2,'ROLE_FARMACEUTICO');
+INSERT INTO roles (id, nombre) VALUES (3,'ROLE_ADMIN');
 
 INSERT INTO estados_civiles (id, estado_civil) VALUES (1,'Soltero');
 INSERT INTO estados_civiles (id, estado_civil) VALUES (2,'Casado');
@@ -34,9 +28,6 @@ INSERT INTO usuarios (username, email, password, enabled) VALUES ('suicideboy', 
 
 INSERT INTO usuarios_roles (usuario_id, role_id) VALUES (1, 1);
 INSERT INTO usuarios_roles (usuario_id, role_id) VALUES (2, 2);
-INSERT INTO usuarios_roles (usuario_id, role_id) VALUES (3, 3);
-INSERT INTO usuarios_roles (usuario_id, role_id) VALUES (3, 2);
-INSERT INTO usuarios_roles (usuario_id, role_id) VALUES (3, 1);
 
 INSERT INTO medicos (nombre, apellido_paterno, apellido_materno, rut, fecha_nacimiento, numero_celular, especialidad_id, sexo_id, usuario_id) VALUES ('Frank', 'Mujica', 'Fuentealba', '19.226.507-k', '1995-08-08', 87059085, 1, 1, 2);
 

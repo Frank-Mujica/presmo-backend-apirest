@@ -3,7 +3,6 @@ package com.cesfam.presmo.backend.apirest.models.entity;
 import java.io.Serializable;
 import java.util.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -13,9 +12,12 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -48,17 +50,20 @@ public class Paciente implements Serializable {
 	@Size(min = 9, max = 12, message = "el tamaño debe estar entre 9 y 12 caracteres")
 	@Column(nullable = false, unique = true)
 	private String rut;
-	@NotEmpty(message = "El campo no puede estar vacío")
+	@NotNull(message = "El campo no puede estar vacío")
 	@Column(name = "fecha_nacimiento", nullable = false)
-	/*@JsonFormat(pattern="dd/mm/yyyy")*/
+	@JsonFormat(pattern= "dd/MM/yyyy")
+	@Temporal(TemporalType.DATE)
 	private Date fechaNacimiento;
 	@NotEmpty(message = "El campo no puede estar vacío")
-	@Size(min = 8, max = 8, message = "el número de celular debe tener 8 digitos")
+	@Pattern(regexp="^[0-9]+$", message = "El número de celular debe contener dígitos númericos")
+	@Size(min = 8, max = 9, message = "El número de celular debe contener de 8 a 9 caracteres númericos")
 	@Column(name = "numero_celular", nullable = false)
-	private int numeroCelular;
-	@Size(min = 8, max = 8, message = "el número de teléfono debe tener 8 digitos")
+	private String numeroCelular;
+	@Pattern(regexp="^[0-9]+$")
+	@Size(min = 8, max = 9, message = "El número de teléfono debe contener de 8 a 9 caracteres númericos")
 	@Column(name = "telefono_fijo", nullable = true)
-	private Integer telefonoFijo;
+	private String telefonoFijo;
 	@NotEmpty(message = "El campo no puede estar vacío puede estar vacío")
 	@Size(min = 9, max = 12, message = "el rut debe tener un tamaño de 9 caracteres")
 	@Column(name = "rut_tutor", nullable = false, unique = true)
@@ -75,43 +80,43 @@ public class Paciente implements Serializable {
 	private String foto;
 	
 	@NotNull(message="Se debe indicar el estado civil del paciente")
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="estado_civil_id")
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private EstadoCivil estadoCivil;
 	
 	@NotNull(message="Se debe indicar el sexo del paciente")
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="sexo_id")
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private Sexo sexo;
 	
-	@NotNull(message="Se debe indicar el sexo del paciente")
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@NotNull(message="Se debe indicar la previsión del paciente")
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="prevision_id")
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private Prevision prevision;
 	
 	@NotNull(message="Se debe indicar el carnet del paciente")
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="carnet_id")
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private Carnet carnet;
 	
 	@NotNull(message="Se debe indicar la regón del paciente")
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="region_id")
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private Region region;
 	
-	@NotNull(message="Se debe indicar el carnet del paciente")
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@NotNull(message="Se debe indicar la comuna del paciente")
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="comuna_id")
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private Comuna comuna;
 	
 	@NotNull(message="Se debe indicar la nacionalidad del paciente")
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="nacionalidad_id")
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private Nacionalidad nacionalidad;
@@ -164,19 +169,19 @@ public class Paciente implements Serializable {
 		this.fechaNacimiento = fechaNacimiento;
 	}
 
-	public int getNumeroCelular() {
+	public String getNumeroCelular() {
 		return numeroCelular;
 	}
 
-	public void setNumeroCelular(int numeroCelular) {
+	public void setNumeroCelular(String numeroCelular) {
 		this.numeroCelular = numeroCelular;
 	}
 
-	public Integer getTelefonoFijo() {
+	public String getTelefonoFijo() {
 		return telefonoFijo;
 	}
 
-	public void setTelefonoFijo(Integer telefonoFijo) {
+	public void setTelefonoFijo(String telefonoFijo) {
 		this.telefonoFijo = telefonoFijo;
 	}
 

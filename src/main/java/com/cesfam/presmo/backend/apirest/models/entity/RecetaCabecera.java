@@ -35,13 +35,13 @@ public class RecetaCabecera implements Serializable {
 	private String estadoReceta;
 
 	@NotNull(message = "Se debe indicar el médico que emite la receta")
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "medico_id")
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	private Medico medico;
 
 	@NotNull(message = "Se debe indicar el paciente al cual está ligada la receta")
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "paciente_id")
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	private Paciente paciente;

@@ -2,7 +2,6 @@ package com.cesfam.presmo.backend.apirest.models.entity;
 
 import java.io.Serializable;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -41,23 +40,22 @@ public class Articulo implements Serializable {
 	@Size(min=4, max=25, message="el tamaño debe estar entre 4 y 25 caracteres")
 	@Column(nullable = false)
 	private String contenido;
-	@NotEmpty(message = "El campo no puede estar vacío")
+	@NotNull(message = "El campo no puede estar vacío")
 	@Column(nullable = false)
 	private float gramaje;
-	@NotEmpty(message = "El campo no puede estar vacío")
 	@Column(nullable = false, columnDefinition="int default 0")
 	private int stock;	
 	@Column(name = "foto_articulo", nullable = true)
 	private String foto;
 	
 	@NotNull(message="Se debe indicar el tipo de artículo")
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="tipo_id")
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private Tipo tipo;
 	
 	@NotNull(message="Se debe indicar el fabricante del artículo")
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="fabricante_id")
 	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private Fabricante fabricante;

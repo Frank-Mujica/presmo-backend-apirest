@@ -2,6 +2,7 @@ package com.cesfam.presmo.backend.apirest.models.entity;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -19,7 +20,8 @@ public class Carnet implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private String sector;
+	@Column(name = "sector")
+	private String nombre;
 	
 	public Long getId() {
 		return id;
@@ -27,11 +29,11 @@ public class Carnet implements Serializable{
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public String getSector() {
-		return sector;
+	public String getNombre() {
+		return nombre;
 	}
-	public void setSector(String sector) {
-		this.sector = sector;
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
 	
 }

@@ -3,7 +3,6 @@ package com.cesfam.presmo.backend.apirest.models.entity;
 import java.io.Serializable;
 import java.util.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -14,10 +13,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 /*import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonFormat;*/
@@ -51,33 +54,35 @@ public class Medico implements Serializable {
 	private String rut;
 	@NotEmpty(message = "El campo no puede estar vacío")
 	@Column(name = "fecha_nacimiento", nullable = false)
-	/*@JsonFormat(pattern="dd/MM/yyyy")
-	@DateTimeFormat(pattern="dd/MM/yyyy")*/
+	@JsonFormat(pattern= "dd/MM/yyyy")
+	@Temporal(TemporalType.DATE)
 	private Date fechaNacimiento;
 	@NotEmpty(message = "El campo no puede estar vacío")
-	@Size(min = 8, max = 8, message = "el número de celular debe tener 8 digitos")
+	@Pattern(regexp="^[0-9]+$", message = "El número de celular debe contener dígitos númericos")
+	@Size(min = 8, max = 9, message = "El número de celular debe contener de 8 a 9 caracteres númericos")
 	@Column(name = "numero_celular", nullable = false)
-	private int numeroCelular;
-	@Size(min = 8, max = 8, message = "el número de teléfono debe tener 8 digitos")
+	private String numeroCelular;
+	@Pattern(regexp="^[0-9]+$")
+	@Size(min = 8, max = 9, message = "El número de teléfono debe contener de 8 a 9 caracteres númericos")
 	@Column(name = "telefono_fijo", nullable = true)
-	private Integer telefonoFijo;
+	private String telefonoFijo;
 	@Column(name = "foto_medico", nullable = true)
 	private String foto;
 
 	@NotNull(message = "Se debe indicar el sexo del médico")
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "sexo_id")
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	private Sexo sexo;
 
 	@NotNull(message = "Se debe indicar la especialidad del médico")
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "especialidad_id")
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	private Especialidad especialidad;
 
 	@NotNull(message = "Se debe indicar un usuario para el médico")
-	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "usuario_id")
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	private Usuario usuario;
@@ -130,19 +135,19 @@ public class Medico implements Serializable {
 		this.fechaNacimiento = fechaNacimiento;
 	}
 
-	public int getNumeroCelular() {
+	public String getNumeroCelular() {
 		return numeroCelular;
 	}
 
-	public void setNumeroCelular(int numeroCelular) {
+	public void setNumeroCelular(String numeroCelular) {
 		this.numeroCelular = numeroCelular;
 	}
 
-	public Integer getTelefonoFijo() {
+	public String getTelefonoFijo() {
 		return telefonoFijo;
 	}
 
-	public void setTelefonoFijo(Integer telefonoFijo) {
+	public void setTelefonoFijo(String telefonoFijo) {
 		this.telefonoFijo = telefonoFijo;
 	}
 	

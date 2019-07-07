@@ -44,13 +44,13 @@ public class RecetaDetalle implements Serializable {
 	private boolean permanente;
 
 	@NotNull(message = "La receta debe contener una cabecera")
-	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "receta_detalle_id")
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	private RecetaCabecera recetaCabecera;
 
 	@NotNull(message = "Se deben indicar los artículos recetados")
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "articulo_id")
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	private Articulo articulo;

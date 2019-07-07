@@ -91,7 +91,7 @@ public class PacienteRestController {
 		return new ResponseEntity<Paciente>(paciente, HttpStatus.OK);
 	}
 	
-	@Secured("Medico")
+	@Secured("ROLE_MEDICO")
 	@PostMapping("/pacientes")
 	public ResponseEntity<?> create(@Valid @RequestBody Paciente paciente, BindingResult result) {
 		
@@ -112,7 +112,7 @@ public class PacienteRestController {
 		try {
 			pacienteNew = pacienteService.save(paciente);
 		} catch(DataAccessException e) {
-			response.put("mensaje", "Error al realizar el registro en la base de datos");
+			response.put("mensaje", "Error al realizar el registrar al paciente en la base de datos");
 			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
@@ -122,7 +122,7 @@ public class PacienteRestController {
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
 	}
 	
-	@Secured("Medico")
+	@Secured("ROLE_MEDICO")
 	@PutMapping("/pacientes/{id}")
 	public ResponseEntity<?> update(@Valid @RequestBody Paciente paciente, BindingResult result, @PathVariable Long id) {
 		
@@ -161,7 +161,7 @@ public class PacienteRestController {
 		pacienteActual.setEmailTutor(paciente.getEmailTutor());
 		pacienteActual.setSexo(paciente.getSexo());
 		pacienteActual.setPrevision(paciente.getPrevision());
-		pacienteActual.setCarnet(paciente.getCarnet());
+		/*pacienteActual.setCarnet(paciente.getCarnet());*/
 		pacienteActual.setRegion(paciente.getRegion());
 		pacienteActual.setComuna(paciente.getComuna());
 		pacienteActual.setNacionalidad(paciente.getNacionalidad());
@@ -180,7 +180,7 @@ public class PacienteRestController {
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
 	}
 	
-	@Secured("Medico")
+	@Secured("ROLE_MEDICO")
 	@DeleteMapping("/pacientes/{id}")
 	public ResponseEntity<?> delete(@PathVariable Long id) {
 		Map<String, Object> response = new HashMap<>();
@@ -203,13 +203,13 @@ public class PacienteRestController {
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		
-		response.put("mensaje", "el paciente ha sido eliminado con éxito");
+		response.put("mensaje", "el paciente ha sido eliminado con éxito!");
 		
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
 		
 	}
 	
-	@Secured({"Medico"})
+	@Secured({"ROLE_MEDICO"})
 	@PostMapping("/pacientes/upload")
 	public ResponseEntity<?> upload(@RequestParam("file") MultipartFile file, @RequestParam("id") Long id){
 		Map<String, Object> response = new HashMap<>();
