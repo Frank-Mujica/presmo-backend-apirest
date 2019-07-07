@@ -161,7 +161,7 @@ public class PacienteRestController {
 		pacienteActual.setEmailTutor(paciente.getEmailTutor());
 		pacienteActual.setSexo(paciente.getSexo());
 		pacienteActual.setPrevision(paciente.getPrevision());
-		/*pacienteActual.setCarnet(paciente.getCarnet());*/
+		pacienteActual.setCarnet(paciente.getCarnet());
 		pacienteActual.setRegion(paciente.getRegion());
 		pacienteActual.setComuna(paciente.getComuna());
 		pacienteActual.setNacionalidad(paciente.getNacionalidad());
