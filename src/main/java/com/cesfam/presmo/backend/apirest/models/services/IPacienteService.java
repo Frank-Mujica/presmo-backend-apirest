@@ -22,7 +22,7 @@ public interface IPacienteService {
 	
 	public Paciente findById(Long id);
 	
-	public Paciente save(Paciente articulo);
+	public Paciente save(Paciente paciente);
 	
 	public void delete (Long id);
 	
