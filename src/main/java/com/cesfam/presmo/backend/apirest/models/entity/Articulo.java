@@ -40,7 +40,6 @@ public class Articulo implements Serializable {
 	@Size(min=4, max=25, message="el tamaño debe estar entre 4 y 25 caracteres")
 	@Column(nullable = false)
 	private String contenido;
-	@Column(nullable = true)
 	private float gramaje;
 	@Column(nullable = false, columnDefinition="int default 0")
 	private int stock;	

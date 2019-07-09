@@ -49,8 +49,8 @@ INSERT INTO medicos (nombre, apellido_paterno, apellido_materno, rut, fecha_naci
 
 INSERT INTO articulos (descripcion, componentes, contenido, gramaje, fabricante_id, tipo_id) VALUES ('Clonazepam', 'Lactosa Monohidrato, Almidón Pregelatinizado, Celulosa Microcristalina, Estearato de Magnesio.', '2.0 mg', 2.0, 1, 1);
 INSERT INTO articulos (descripcion, componentes, contenido, gramaje, fabricante_id, tipo_id) VALUES ('Alprazolam', 'Docusato de Sodio, Benzoato de Sodio, Almidón de Patata Pregelatinizado, Celulosa Microcristalina, Lactosa Monohidrato, Estearato de Magnesio, Sílice Coloidal Anhidra.', '0.5 mg.', 0.5, 2, 1);
-INSERT INTO articulos (descripcion, componentes, contenido, fabricante_id, tipo_id) VALUES ('Jeringa', 'barril, el émbolo, la Junta, la aguja', '1 jeringa desechable', 3, 2);
-INSERT INTO articulos (descripcion, componentes, contenido, fabricante_id, tipo_id) VALUES ('Jarabe', 'Antitusivo Compositum', '1 jarabe 200ml', 4, 3);
+INSERT INTO articulos (descripcion, componentes, contenido, gramaje, fabricante_id, tipo_id) VALUES ('Jeringa', 'barril, el émbolo, la Junta, la aguja', '1 jeringa desechable', 0, 3, 2);
+INSERT INTO articulos (descripcion, componentes, contenido, gramaje, fabricante_id, tipo_id) VALUES ('Jarabe', 'Antitusivo Compositum', '1 jarabe 200ml', 3.0, 4, 3);
 
 INSERT INTO partidas (id, fecha_partida, cantidad_llegada, cantidad_restante, articulo_id) VALUES (1, '2019-07-09', 20, 20, 1);
 
