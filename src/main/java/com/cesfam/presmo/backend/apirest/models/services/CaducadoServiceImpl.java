@@ -10,9 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.cesfam.presmo.backend.apirest.models.dao.ICaducadoDao;
 import com.cesfam.presmo.backend.apirest.models.entity.Caducado;
-import com.cesfam.presmo.backend.apirest.models.entity.Farmaceutico;
 import com.cesfam.presmo.backend.apirest.models.entity.Partida;
-import com.cesfam.presmo.backend.apirest.models.entity.RecetaDetalle;
 import com.cesfam.presmo.backend.apirest.models.entity.MotivoCaducado;
 
 
