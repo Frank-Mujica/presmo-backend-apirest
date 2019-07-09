@@ -32,6 +32,10 @@ public class RecetaCabecera implements Serializable {
 	@Size(min = 4, max = 50, message = "el tamaño debe estar entre 4 y 50 caracteres")
 	@Column(name = "estado_receta", nullable = false)
 	private String estadoReceta;
+	@NotEmpty(message = "El campo no puede estar vacío")
+	@Size(min = 4, max = 150, message = "el tamaño debe estar entre 4 y 150 caracteres")
+	@Column(nullable = false)
+	private String detalle;
 
 	@NotNull(message = "Se debe indicar el médico que emite la receta")
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -59,6 +63,14 @@ public class RecetaCabecera implements Serializable {
 
 	public void setEstadoReceta(String estadoReceta) {
 		this.estadoReceta = estadoReceta;
+	}
+	
+	public String getDetalle() {
+		return detalle;
+	}
+
+	public void setDetalle(String detalle) {
+		this.detalle = detalle;
 	}
 
 	public static long getSerialversionuid() {

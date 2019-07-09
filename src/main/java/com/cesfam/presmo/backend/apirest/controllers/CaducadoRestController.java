@@ -73,7 +73,7 @@ public class CaducadoRestController {
 	}
 	
 	@Secured("ROLE_MEDICO")
-	@PostMapping("/receta_cabeceras")
+	@PostMapping("/caducados")
 	public ResponseEntity<?> create(@Valid @RequestBody Caducado caducado, BindingResult result) {
 		
 		Caducado caducadoNew = null;

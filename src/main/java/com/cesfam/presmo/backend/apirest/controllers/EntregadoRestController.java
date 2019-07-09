@@ -72,7 +72,7 @@ public class EntregadoRestController {
 	}
 	
 	@Secured("ROLE_MEDICO")
-	@PostMapping("/receta_cabeceras")
+	@PostMapping("/entregados")
 	public ResponseEntity<?> create(@Valid @RequestBody Entregado entregado, BindingResult result) {
 		
 		Entregado entregadoNew = null;
@@ -102,17 +102,17 @@ public class EntregadoRestController {
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
 	}
 	
-	@GetMapping("/caducados/farmaceuticos")
+	@GetMapping("/entregados/farmaceuticos")
 	public List<Farmaceutico> listarFarmaceuticos(){
 		return entregadoService.findAllFarmaceuticos();
 	}
 	
-	@GetMapping("/caducados/receta_detalles")
+	@GetMapping("/entregados/receta_detalles")
 	public List<RecetaDetalle> listarReceta_Detalles(){
 		return entregadoService.findAllReceta_Detalles();
 	}
 	
-	@GetMapping("/caducados/partidas")
+	@GetMapping("/entregados/partidas")
 	public List<Partida> listarPartidas(){
 		return entregadoService.findAllPartidas();
 	}
