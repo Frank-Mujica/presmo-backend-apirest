@@ -21,7 +21,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter{
 
 	@Override
 	public void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().antMatchers(HttpMethod.GET,"/api/v1/articulos", "/api/v1/articulos/**", "/api/v1/articulos/page/**", "/api/v1/pacientes", "/api/v1/pacientes/**","/api/v1/partidas", "/api/v1/partidas/**", "/api/v1/partidas/page/**", "/api/v1/uploads/img/**", "/images/**").permitAll()
+		http.authorizeRequests().antMatchers(HttpMethod.GET,"/api/v1/articulos", "/api/v1/articulos/**", "/api/v1/articulos/page/**", "/api/v1/pacientes", "/api/v1/pacientes/**","/api/v1/partidas", "/api/v1/partidas/**", "/api/v1/partidas/page/**", "/api/v1/reservas", "/api/v1/reservas/**", "/api/v1/reservas/page/**", "/api/v1/caducados", "/api/v1/caducados/**", "/api/v1/caducados/page/**", "/api/v1/entregados", "/api/v1/entregados/**", "/api/v1/entregados/page/**", "/api/v1/motivo_caducados", "/api/v1/motivo_caducados/**","/api/v1/motivo_caducados", "/api/v1/receta_cabeceras", "/api/v1/receta_cabeceras/**", "/api/v1/receta_cabeceras/page/**", "/api/v1/receta_detalles", "/api/v1/receta_detalles/**", "/api/v1/receta_detalles/page/**", "/api/v1/uploads/img/**", "/images/**").permitAll()
 		/*.antMatchers(HttpMethod.GET, "/api/v1/articulos/{id}").hasAnyRole("USER", "ADMIN")
 		.antMatchers(HttpMethod.POST, "/api/v1/articulos").hasRole("ADMIN")
 		.antMatchers("/api/v1/articulos/**").hasRole("ADMIN")*/
