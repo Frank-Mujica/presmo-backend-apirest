@@ -101,7 +101,7 @@ public class CaducadoRestController {
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
 	}
 	
-	@GetMapping("/caducados/pacientes")
+	@GetMapping("/caducados/motivo_caducados")
 	public List<MotivoCaducado> listarMotivo_Caducados(){
 		return caducadoService.findAllMotivo_Caducados();
 	}
