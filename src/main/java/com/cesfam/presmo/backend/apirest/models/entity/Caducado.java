@@ -10,7 +10,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -55,7 +54,7 @@ public class Caducado implements Serializable {
 	private String relacionReceptor;
 
 	@NotNull(message = "Se debe indicar el farmacéutico a cargo")
-	@ManyToMany(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "farmaceutico_id")
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	private Farmaceutico farmaceutico;
