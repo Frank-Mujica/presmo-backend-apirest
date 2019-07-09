@@ -14,7 +14,7 @@ import com.cesfam.presmo.backend.apirest.models.entity.Articulo;
 import com.cesfam.presmo.backend.apirest.models.entity.RecetaCabecera;
 
 @Service
-public class IRecetaDetalleImpl implements IRecetaDetalleService {
+public class RecetaDetalleImpl implements IRecetaDetalleService {
 
 	@Autowired
 	private IRecetaDetalleDao recetaDetalleDao;
