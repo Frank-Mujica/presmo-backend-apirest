@@ -68,8 +68,8 @@ public class MotivoCaducadoRestController {
 		return new ResponseEntity<MotivoCaducado>(motivoCaducado, HttpStatus.OK);
 	}
 	
-	@Secured("ROLE_MEDICO")
-	@PostMapping("/receta_cabeceras")
+	@Secured("ROLE_FARMACEUTICO")
+	@PostMapping("/motivo_caducados")
 	public ResponseEntity<?> create(@Valid @RequestBody MotivoCaducado motivoCaducado, BindingResult result) {
 		
 		MotivoCaducado motivoCaducadoNew = null;
