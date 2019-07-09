@@ -60,7 +60,7 @@ public class MotivoCaducadoRestController {
 		}
 		
 		
-		if(caducado == null) {
+		if(motivoCaducado == null) {
 			response.put("mensaje", "La artículo motivo caducado ID: ".concat(id.toString().concat(" no se encuentra registrada")));
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
 		}
