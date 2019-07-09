@@ -14,7 +14,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -50,23 +49,11 @@ public class Caducado implements Serializable {
 	@Column(name = "relacion_receptor", length = 30, nullable = true)
 	private String relacionReceptor;
 
-	@NotNull(message = "Se debe indicar el farmacéutico a cargo")
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "farmaceutico_id")
-	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
-	private Farmaceutico farmaceutico;
-
 	@NotNull(message = "Se debe la partida de la cual se caduca el artículo")
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "partida_id")
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	private Partida partida;
-
-	@NotNull(message = "Se debe la partida de la cual se caduca el artículo")
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "receta_detalle_id")
-	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
-	private RecetaDetalle recetaDetalle;
 
 	@NotNull(message = "Se debe el motivo por el que se caduca el artículo")
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -122,28 +109,12 @@ public class Caducado implements Serializable {
 		this.relacionReceptor = relacionReceptor;
 	}
 
-	public Farmaceutico getFarmaceutico() {
-		return farmaceutico;
-	}
-
-	public void setFarmaceutico(Farmaceutico farmaceutico) {
-		this.farmaceutico = farmaceutico;
-	}
-
 	public Partida getPartida() {
 		return partida;
 	}
 
 	public void setPartida(Partida partida) {
 		this.partida = partida;
-	}
-
-	public RecetaDetalle getRecetaDetalle() {
-		return recetaDetalle;
-	}
-
-	public void setRecetaDetalle(RecetaDetalle recetaDetalle) {
-		this.recetaDetalle = recetaDetalle;
 	}
 
 	public MotivoCaducado getMotivoCaducado() {

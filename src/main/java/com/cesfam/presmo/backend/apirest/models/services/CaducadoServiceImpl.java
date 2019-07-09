@@ -59,23 +59,9 @@ public class CaducadoServiceImpl implements ICaducadoService {
 
 	@Override
 	@Transactional
-	public List<Farmaceutico> findAllFarmaceuticos() {
-		// TODO Auto-generated method stub
-		return caducadoDao.findAllfarmaceuticos();
-	}
-
-	@Override
-	@Transactional
 	public List<Partida> findAllPartidas() {
 		// TODO Auto-generated method stub
 		return caducadoDao.findAllPartidas();
-	}
-	
-	@Override
-	@Transactional
-	public List<RecetaDetalle> findAllReceta_Detalles() {
-		// TODO Auto-generated method stub
-		return caducadoDao.findAllReceta_Detalles();
 	}
 
 	@Override

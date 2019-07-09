@@ -26,9 +26,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cesfam.presmo.backend.apirest.models.entity.Caducado;
-import com.cesfam.presmo.backend.apirest.models.entity.Farmaceutico;
 import com.cesfam.presmo.backend.apirest.models.entity.MotivoCaducado;
-import com.cesfam.presmo.backend.apirest.models.entity.RecetaDetalle;
 import com.cesfam.presmo.backend.apirest.models.entity.Partida;
 import com.cesfam.presmo.backend.apirest.models.services.ICaducadoService;
 
@@ -103,19 +101,9 @@ public class CaducadoRestController {
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
 	}
 	
-	@GetMapping("/caducados/farmaceuticos")
-	public List<Farmaceutico> listarFarmaceuticos(){
-		return caducadoService.findAllFarmaceuticos();
-	}
-	
 	@GetMapping("/caducados/pacientes")
 	public List<MotivoCaducado> listarMotivo_Caducados(){
 		return caducadoService.findAllMotivo_Caducados();
-	}
-	
-	@GetMapping("/caducados/receta_detalles")
-	public List<RecetaDetalle> listarReceta_Detalles(){
-		return caducadoService.findAllReceta_Detalles();
 	}
 	
 	@GetMapping("/caducados/partidas")
