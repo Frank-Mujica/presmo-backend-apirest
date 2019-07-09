@@ -60,19 +60,19 @@ public class Caducado implements Serializable {
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	private Farmaceutico farmaceutico;
 
-	@NotNull(message = "Se debe la partida de la cual se descuenta el artículo")
+	@NotNull(message = "Se debe la partida de la cual se caduca el artículo")
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "partida_id")
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	private Partida partida;
 
-	@NotNull(message = "Se debe la partida de la cual se descuenta el artículo")
+	@NotNull(message = "Se debe la partida de la cual se caduca el artículo")
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "receta_detalle_id")
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	private RecetaDetalle recetaDetalle;
 
-	@NotNull(message = "Se debe la partida de la cual se descuenta el artículo")
+	@NotNull(message = "Se debe el motivo por el que se caduca el artículo")
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "motivo_caducado_id")
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
