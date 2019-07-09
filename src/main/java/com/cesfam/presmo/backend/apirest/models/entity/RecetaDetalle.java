@@ -12,12 +12,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+/**
+ * @author fmuji
+ *
+ */
 @Entity
 @Table(name = "receta_detalle")
 public class RecetaDetalle implements Serializable {
@@ -31,6 +33,9 @@ public class RecetaDetalle implements Serializable {
 	private Long id;
 	@Column(name = "estado_detalle", nullable = false)
 	private boolean estadoDetalle;
+	@NotNull(message = "El campo no puede estar vacío")
+	@Column(name = "cantidad", nullable = false)
+	private int cantidad;
 	@NotNull(message = "El campo no puede estar vacío")
 	@Column(nullable = false)
 	private int dias;
@@ -66,6 +71,14 @@ public class RecetaDetalle implements Serializable {
 
 	public void setEstadoDetalle(boolean estadoDetalle) {
 		this.estadoDetalle = estadoDetalle;
+	}
+
+	public int getCantidad() {
+		return cantidad;
+	}
+
+	public void setCantidad(int cantidad) {
+		this.cantidad = cantidad;
 	}
 
 	public int getDias() {

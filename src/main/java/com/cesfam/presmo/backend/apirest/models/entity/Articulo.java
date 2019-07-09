@@ -1,4 +1,3 @@
-
 package com.cesfam.presmo.backend.apirest.models.entity;
 
 import java.io.Serializable;
