@@ -20,8 +20,13 @@ INSERT INTO carnets (id, sector) VALUES (2,'Celeste');
 INSERT INTO carnets (id, sector) VALUES (3,'Verde');
 
 INSERT INTO tipos (id, tipo_articulo) VALUES (1,'Fármaco');
+INSERT INTO tipos (id, tipo_articulo) VALUES (2,'Insumo');
+INSERT INTO tipos (id, tipo_articulo) VALUES (3,'Jarabe');
 
-INSERT INTO fabricantes (id, fabricante) VALUES (1, 'Laboratorio Chile');
+INSERT INTO fabricantes (id, fabricante) VALUES (1, 'INTERPHARMA S.A.');
+INSERT INTO fabricantes (id, fabricante) VALUES (2, 'MINTLAB');
+INSERT INTO fabricantes (id, fabricante) VALUES (3, 'Ortopedias más vida');
+INSERT INTO fabricantes (id, fabricante) VALUES (4, 'Bisolvon');
 
 INSERT INTO usuarios (username, email, password, enabled) VALUES ('frmujica', 'f.mujica1995@gmail.com', '$2a$10$.1eMU.ab0jF3cGBs7G3/Ju5jB4Gi7MAqerQh9V1goIIDp.5XiYHFe', 1);
 INSERT INTO usuarios (username, email, password, enabled) VALUES ('ercabello', 'er.cabello@alumnos.duoc.cl', '$2a$10$1.A4b4Hw7UaGqKW1pIUHjeaG9HnDdGmIhM/oj6pEvy9RqUapnEXsi', 1);
@@ -40,8 +45,10 @@ INSERT INTO usuarios_roles (usuario_id, role_id) VALUES (3, 3);
 
 INSERT INTO medicos (nombre, apellido_paterno, apellido_materno, rut, fecha_nacimiento, numero_celular, especialidad_id, sexo_id, usuario_id) VALUES ('Frank', 'Mujica', 'Fuentealba', '19.226.507-k', '1995-08-08', 87059085, 1, 1, 2);
 
-INSERT INTO articulos (descripcion, componentes, contenido, gramaje, fabricante_id, tipo_id) VALUES ('Clonazepam', 'Lactosa Monohidrato, Almidón Pregelatinizado, Celulosa Microcristalina, Estearato de Magnesio.', '30 Comprimidos.', 2.0, 1, 1);
-INSERT INTO articulos (descripcion, componentes, contenido, gramaje, fabricante_id, tipo_id) VALUES ('Alprazolam', 'Docusato de Sodio, Benzoato de Sodio, Almidón de Patata Pregelatinizado, Celulosa Microcristalina, Lactosa Monohidrato, Estearato de Magnesio, Sílice Coloidal Anhidra.', '30 Comprimidos.', 0.5, 1, 1);
+INSERT INTO articulos (descripcion, componentes, contenido, gramaje, fabricante_id, tipo_id) VALUES ('Clonazepam', 'Lactosa Monohidrato, Almidón Pregelatinizado, Celulosa Microcristalina, Estearato de Magnesio.', '2.0 mg', 2.0, 1, 1);
+INSERT INTO articulos (descripcion, componentes, contenido, gramaje, fabricante_id, tipo_id) VALUES ('Alprazolam', 'Docusato de Sodio, Benzoato de Sodio, Almidón de Patata Pregelatinizado, Celulosa Microcristalina, Lactosa Monohidrato, Estearato de Magnesio, Sílice Coloidal Anhidra.', '0.5 mg.', 0.5, 2, 1);
+INSERT INTO articulos (descripcion, componentes, contenido, fabricante_id, tipo_id) VALUES ('Jeringa', 'barril, el émbolo, la Junta, la aguja', '1 jeringa desechable', 3, 2);
+INSERT INTO articulos (descripcion, componentes, contenido, fabricante_id, tipo_id) VALUES ('Jarabe', 'Antitusivo Compositum', '1 jarabe 200ml', 4, 3);
 
 INSERT INTO partidas (id, fecha_partida, cantidad_llegada, cantidad_restante, articulo_id) VALUES (1, '2019-07-09', 20, 20, 1);
 
