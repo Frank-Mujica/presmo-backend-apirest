@@ -8,6 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.cesfam.presmo.backend.apirest.models.dao.IPacienteDao;
 import com.cesfam.presmo.backend.apirest.models.dao.IReservaDao;
 import com.cesfam.presmo.backend.apirest.models.entity.Reserva;
 import com.cesfam.presmo.backend.apirest.models.entity.Articulo;
@@ -18,6 +19,9 @@ public class ReservaServiceImpl implements IReservaService {
 
 	@Autowired
 	private IReservaDao reservaDao;
+	
+	@Autowired
+	private IPacienteDao pacienteDao;
 
 	@Override
 	@Transactional(readOnly = true)
@@ -60,6 +64,12 @@ public class ReservaServiceImpl implements IReservaService {
 	public List<Paciente> findAllPacientes() {
 		// TODO Auto-generated method stub
 		return reservaDao.findAllPacientes();
+	}
+
+	@Override
+	public Paciente findByRut(String rut) {
+		// TODO Auto-generated method stub
+		return pacienteDao.findByRut(rut);
 	}
 
 }

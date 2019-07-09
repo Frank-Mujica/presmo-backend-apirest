@@ -40,7 +40,7 @@ public class ReservaRestController {
 	private IReservaService reservaService;
 	
 	@Autowired
-	private IReservaService pacienteService;
+	private IPacienteService pacienteService;
 	
 	@GetMapping("/reservas")
 	public List<Reserva> index(){
