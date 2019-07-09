@@ -119,7 +119,7 @@ public class ArticuloRestController {
 	
 	@Secured("ROLE_FARMACEUTICO")
 	@PutMapping("/articulos/{id}")
-	public ResponseEntity<?> update(@Valid @RequestBody Articulo articulo, BindingResult result, @PathVariable Long id) {
+	public ResponseEntity<?> update(@RequestBody Articulo articulo, BindingResult result, @PathVariable Long id) {
 		
 		Articulo articuloActual = articuloService.findById(id);
 		Articulo articuloUpdate = null;

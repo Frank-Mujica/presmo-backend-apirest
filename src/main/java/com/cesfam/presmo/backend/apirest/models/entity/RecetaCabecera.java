@@ -18,7 +18,7 @@ import javax.validation.constraints.Size;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
-@Table(name = "receta_cabecera")
+@Table(name = "receta_cabeceras")
 public class RecetaCabecera implements Serializable {
 
 	/**

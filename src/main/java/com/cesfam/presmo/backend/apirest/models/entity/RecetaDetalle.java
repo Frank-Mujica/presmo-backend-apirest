@@ -44,7 +44,7 @@ public class RecetaDetalle implements Serializable {
 
 	@NotNull(message = "La receta debe contener una cabecera")
 	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "receta_detalle_id")
+	@JoinColumn(name = "receta_cabecera_id")
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	private RecetaCabecera recetaCabecera;
 

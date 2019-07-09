@@ -15,7 +15,7 @@ public interface IRecetaDetalleDao  extends JpaRepository<RecetaDetalle, Long>{
 	public List<Articulo> findAllArticulos(); 
 
 	@Query("from RecetaCabecera")
-	public List<RecetaCabecera> findAllReceta_Cabecera(); 
+	public List<RecetaCabecera> findAllReceta_Cabeceras(); 
 	
 }
 

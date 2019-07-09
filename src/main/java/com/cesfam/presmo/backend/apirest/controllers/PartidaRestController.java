@@ -55,7 +55,7 @@ public class PartidaRestController {
 		try {
 			partida = partidaService.findById(id);
 		} catch(DataAccessException e) {
-			response.put("mensaje", "Error al buscar el artículo");
+			response.put("mensaje", "Error al buscar la partida");
 			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
