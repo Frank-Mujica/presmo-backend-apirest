@@ -45,7 +45,7 @@ public class TratamientosLargos {
 	
 	@NotNull(message = "Se deben indicar los artículos recetados")
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "articulo_id")
+	@JoinColumn(name = "receta_cabecera_id")
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	private RecetaCabecera recetaCabecera;
 
