@@ -25,7 +25,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.annotation.Secured;
+/*import org.springframework.security.access.annotation.Secured;*/
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -86,7 +86,7 @@ public class ArticuloRestController {
 		return new ResponseEntity<Articulo>(articulo, HttpStatus.OK);
 	}
 	
-	@Secured("ROLE_FARMACEUTICO")
+	/*@Secured("ROLE_FARMACEUTICO")*/
 	@PostMapping("/articulos")
 	public ResponseEntity<?> create(@Valid @RequestBody Articulo articulo, BindingResult result) {
 		
@@ -117,7 +117,7 @@ public class ArticuloRestController {
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
 	}
 	
-	@Secured("ROLE_FARMACEUTICO")
+	/*@Secured("ROLE_FARMACEUTICO")*/
 	@PutMapping("/articulos/{id}")
 	public ResponseEntity<?> update(@RequestBody Articulo articulo, BindingResult result, @PathVariable Long id) {
 		
@@ -159,7 +159,7 @@ public class ArticuloRestController {
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
 	}
 	
-	@Secured("ROLE_FARMACEUTICO")
+	/*@Secured("ROLE_FARMACEUTICO")*/
 	@DeleteMapping("/articulos/{id}")
 	public ResponseEntity<?> delete(@PathVariable Long id) {
 		Map<String, Object> response = new HashMap<>();
@@ -188,7 +188,7 @@ public class ArticuloRestController {
 		
 	}
 	
-	@Secured({"ROLE_FARMACEUTICO"})
+	/*@Secured({"ROLE_FARMACEUTICO"})*/
 	@PostMapping("/articulos/upload")
 	public ResponseEntity<?> upload(@RequestParam("file") MultipartFile file, @RequestParam("id") Long id){
 		Map<String, Object> response = new HashMap<>();

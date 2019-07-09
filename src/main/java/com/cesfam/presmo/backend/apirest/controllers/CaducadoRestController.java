@@ -13,7 +13,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.annotation.Secured;
+/*import org.springframework.security.access.annotation.Secured;*/
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 /*import org.springframework.web.bind.annotation.DeleteMapping;*/
@@ -70,7 +70,7 @@ public class CaducadoRestController {
 		return new ResponseEntity<Caducado>(caducado, HttpStatus.OK);
 	}
 	
-	@Secured("ROLE_FARMACEUTICO")
+	/*@Secured("ROLE_FARMACEUTICO")*/
 	@PostMapping("/caducados")
 	public ResponseEntity<?> create(@Valid @RequestBody Caducado caducado, BindingResult result) {
 		

@@ -23,17 +23,14 @@ INSERT INTO tipos (id, tipo_articulo) VALUES (1,'Fármaco');
 
 INSERT INTO fabricantes (id, fabricante) VALUES (1, 'Laboratorio Chile');
 
-INSERT INTO usuarios (username, email, password, enabled) VALUES ('frmujica', 'f.mujica1995@gmail.com', '$2a$10$1/FWMTqX/H4enA5s9k.ZGupTEudJhq0mk1QQMzYvRGjpdBw.nwQSu', 1);
-INSERT INTO usuarios (username, email, password, enabled) VALUES ('ercabello', 'er.cabello@alumnos.duoc.cl', '$2a$10$ua67IMKby8nIhNyS5LxXZezHbxz0b1zfjH13dp2gsNCnA6jxbPKg6', 1);
-INSERT INTO usuarios (username, email, password, enabled) VALUES ('admin', 'admin@gmail.com', '$2a$10$z0wQtklQDWLQwZ86bb.Q/e2PD6CnC4kFszC/FHqdepy5zqO3J2q1O', 1);
+INSERT INTO usuarios (username, email, password, enabled) VALUES ('frmujica', 'f.mujica1995@gmail.com', '$2a$10$.1eMU.ab0jF3cGBs7G3/Ju5jB4Gi7MAqerQh9V1goIIDp.5XiYHFe', 1);
+INSERT INTO usuarios (username, email, password, enabled) VALUES ('ercabello', 'er.cabello@alumnos.duoc.cl', '$2a$10$1.A4b4Hw7UaGqKW1pIUHjeaG9HnDdGmIhM/oj6pEvy9RqUapnEXsi', 1);
+INSERT INTO usuarios (username, email, password, enabled) VALUES ('admin', 'admin@gmail.com', '$2a$10$Yi6xmCnzzANmRZ1qk24kXORORn2ayELPUcaSQOp9VQQqL3GVMxzvm', 1);
 
 INSERT INTO motivo_caducados (id, motivo) VALUES (1, 'Vencido');
 INSERT INTO motivo_caducados (id, motivo) VALUES (2, 'Envase Roto');
 INSERT INTO motivo_caducados (id, motivo) VALUES (3, 'Mal Estado');
 INSERT INTO motivo_caducados (id, motivo) VALUES (4, 'Expiración');
-INSERT INTO motivo_caducados (id, motivo) VALUES (5, 'Dañado');
-INSERT INTO motivo_caducados (id, motivo) VALUES (6, 'Otro');
-
 INSERT INTO motivo_caducados (id, motivo) VALUES (5, 'Dañado');
 INSERT INTO motivo_caducados (id, motivo) VALUES (6, 'Otro');
 
@@ -45,6 +42,8 @@ INSERT INTO medicos (nombre, apellido_paterno, apellido_materno, rut, fecha_naci
 
 INSERT INTO articulos (descripcion, componentes, contenido, gramaje, fabricante_id, tipo_id) VALUES ('Clonazepam', 'Lactosa Monohidrato, Almidón Pregelatinizado, Celulosa Microcristalina, Estearato de Magnesio.', '30 Comprimidos.', 2.0, 1, 1);
 INSERT INTO articulos (descripcion, componentes, contenido, gramaje, fabricante_id, tipo_id) VALUES ('Alprazolam', 'Docusato de Sodio, Benzoato de Sodio, Almidón de Patata Pregelatinizado, Celulosa Microcristalina, Lactosa Monohidrato, Estearato de Magnesio, Sílice Coloidal Anhidra.', '30 Comprimidos.', 0.5, 1, 1);
+
+INSERT INTO partidas (id, fecha_partida, cantidad_llegada, cantidad_restante, articulo_id) VALUES (1, '2019-07-09', 20, 20, 1);
 
 INSERT INTO regiones (id, nombre, nombre_ordinal) VALUES (1,'Arica y Parinacota','XV');
 INSERT INTO regiones (id, nombre, nombre_ordinal) VALUES (2,'Tarapacá','I');
@@ -611,5 +610,3 @@ INSERT INTO nacionalidades (pais, gentilicio, iso) VALUES ('Zambia','Zambiana','
 INSERT INTO nacionalidades (pais, gentilicio, iso) VALUES ('Zimbabue','Zimbabuense','ZWE');
  
 INSERT INTO pacientes (nombre, apellido_paterno, apellido_materno, rut, fecha_nacimiento, numero_celular, telefono_fijo, rut_tutor, nombre_tutor, email_tutor, estado_civil_id, sexo_id, prevision_id, carnet_id, region_id, comuna_id, nacionalidad_id) VALUES ('frank', 'mujica', 'fuentealba', '19.226.507-k', '1995-08-28', 88888888, 99999999, '22.222.222-2', 'Carlos', 'carlos@gmail.com', 1, 1, 1, 1, 7, 103, 39);
-
-INSERT INTO partidas (id, fecha_partida, cantidad_llegada, cantidad_restante, articulo_id) VALUES (1, '2019-07-09', 20, 20, 1);

@@ -13,7 +13,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.annotation.Secured;
+/*import org.springframework.security.access.annotation.Secured;*/
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -71,7 +71,7 @@ public class RecetaDetalleRestController {
 		return new ResponseEntity<RecetaDetalle>(recetaDetalle, HttpStatus.OK);
 	}
 	
-	@Secured("ROLE_MEDICO")
+	/*@Secured("ROLE_MEDICO")*/
 	@PostMapping("/receta_detalles")
 	public ResponseEntity<?> create(@Valid @RequestBody RecetaDetalle recetaDetalle, BindingResult result) {
 		
@@ -102,7 +102,7 @@ public class RecetaDetalleRestController {
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
 	}
 	
-	@Secured("ROLE_MEDICO")
+	/*@Secured("ROLE_MEDICO")*/
 	@PutMapping("/receta_detalles/{id}")
 	public ResponseEntity<?> update(@Validated @RequestBody RecetaDetalle recetaDetalle, BindingResult result, @PathVariable Long id) {
 		

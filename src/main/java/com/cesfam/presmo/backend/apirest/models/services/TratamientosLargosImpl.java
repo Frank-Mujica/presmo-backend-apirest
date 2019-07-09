@@ -13,7 +13,7 @@ import com.cesfam.presmo.backend.apirest.models.entity.TratamientosLargos;
 import com.cesfam.presmo.backend.apirest.models.entity.RecetaCabecera;
 
 @Service
-public class ITratamientosLargosImpl implements ITratamientosLargosService {
+public class TratamientosLargosImpl implements ITratamientosLargosService {
 
 	@Autowired
 	private ITratamientosLargosDao tratamientosLargosDao;
@@ -26,30 +26,35 @@ public class ITratamientosLargosImpl implements ITratamientosLargosService {
 	}
 
 	@Override
+	@Transactional
 	public Page<TratamientosLargos> findAll(Pageable pageable) {
 		// TODO Auto-generated method stub
 		return tratamientosLargosDao.findAll(pageable);
 	}
 
 	@Override
+	@Transactional
 	public TratamientosLargos findById(Long id) {
 		// TODO Auto-generated method stub
 		return tratamientosLargosDao.findById(id).orElse(null);
 	}
 
 	@Override
+	@Transactional
 	public TratamientosLargos save(TratamientosLargos tratamientosLargos) {
 		// TODO Auto-generated method stub
 		return tratamientosLargosDao.save(tratamientosLargos);
 	}
 
 	@Override
+	@Transactional
 	public void delete(Long id) {
 		// TODO Auto-generated method stub
 		tratamientosLargosDao.deleteById(id);
 	}
 
 	@Override
+	@Transactional
 	public List<RecetaCabecera> findAllReceta_Cabeceras() {
 		// TODO Auto-generated method stub
 		return tratamientosLargosDao.findAllReceta_Cabeceras();

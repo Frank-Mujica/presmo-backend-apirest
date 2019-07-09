@@ -13,7 +13,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.annotation.Secured;
+/*import org.springframework.security.access.annotation.Secured;*/
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -69,7 +69,7 @@ public class PartidaRestController {
 		return new ResponseEntity<Partida>(partida, HttpStatus.OK);
 	}
 	
-	@Secured("ROLE_FARMACEUTICO")
+	/*@Secured("ROLE_FARMACEUTICO")*/
 	@PostMapping("/partidas")
 	public ResponseEntity<?> create(@Valid @RequestBody Partida partida, BindingResult result) {
 		
@@ -100,7 +100,7 @@ public class PartidaRestController {
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
 	}
 	
-	@Secured("ROLE_FARMACEUTICO")
+	/*@Secured("ROLE_FARMACEUTICO")*/
 	@PutMapping("/partidas/{id}")
 	public ResponseEntity<?> update(@Valid @RequestBody Partida partida, BindingResult result, @PathVariable Long id) {
 		
@@ -142,7 +142,7 @@ public class PartidaRestController {
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
 	}
 	
-	@Secured("ROLE_FARMACEUTICO")
+	/*@Secured("ROLE_FARMACEUTICO")*/
 	@DeleteMapping("/partidas/{id}")
 	public ResponseEntity<?> delete(@PathVariable Long id) {
 		Map<String, Object> response = new HashMap<>();

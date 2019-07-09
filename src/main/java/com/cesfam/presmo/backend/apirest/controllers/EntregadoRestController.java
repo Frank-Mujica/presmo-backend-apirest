@@ -13,7 +13,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.annotation.Secured;
+/*import org.springframework.security.access.annotation.Secured;*/
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 /*import org.springframework.web.bind.annotation.DeleteMapping;*/
@@ -71,7 +71,7 @@ public class EntregadoRestController {
 		return new ResponseEntity<Entregado>(entregado, HttpStatus.OK);
 	}
 	
-	@Secured("ROLE_MEDICO")
+	/*@Secured("ROLE_MEDICO")*/
 	@PostMapping("/entregados")
 	public ResponseEntity<?> create(@Valid @RequestBody Entregado entregado, BindingResult result) {
 		

@@ -25,56 +25,55 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.cesfam.presmo.backend.apirest.models.entity.Medico;
-import com.cesfam.presmo.backend.apirest.models.entity.Paciente;
+import com.cesfam.presmo.backend.apirest.models.entity.TratamientosLargos;
 import com.cesfam.presmo.backend.apirest.models.entity.RecetaCabecera;
-import com.cesfam.presmo.backend.apirest.models.services.IRecetaCabeceraService;
+import com.cesfam.presmo.backend.apirest.models.services.ITratamientosLargosService;
 
 @CrossOrigin(origins= {"http://localhost:4200"})
 @RestController
 @RequestMapping("/api/v1")
-public class RecetaCabeceraRestController {
+public class TratamientosLargosRestController {
 	
 	@Autowired
-	private IRecetaCabeceraService recetaCabeceraService;
+	private ITratamientosLargosService tratamientosLargosService;
 	
-	@GetMapping("/receta_cabeceras")
-	public List<RecetaCabecera> index(){
-		return recetaCabeceraService.findAll();
+	@GetMapping("/tratamientos_largos")
+	public List<TratamientosLargos> index(){
+		return tratamientosLargosService.findAll();
 	}
 	
-	@GetMapping("/receta_cabeceras/page/{page}")
-	public Page<RecetaCabecera> index(@PathVariable Integer page){
-		return recetaCabeceraService.findAll(PageRequest.of(page, 6));
+	@GetMapping("/tratamientos_largos/page/{page}")
+	public Page<TratamientosLargos> index(@PathVariable Integer page){
+		return tratamientosLargosService.findAll(PageRequest.of(page, 6));
 	}
 	
-	@GetMapping("/receta_cabeceras/{id}")
+	@GetMapping("/tratamientos_largos/{id}")
 	public ResponseEntity<?> show(@PathVariable Long id) {
 		
-		RecetaCabecera recetaCabecera = null;
+		TratamientosLargos tratamientosLargos = null;
 		Map<String, Object> response = new HashMap<>();
 		try {
-			recetaCabecera = recetaCabeceraService.findById(id);
+			tratamientosLargos = tratamientosLargosService.findById(id);
 		} catch(DataAccessException e) {
-			response.put("mensaje", "Error al buscar la cabecera de la receta");
+			response.put("mensaje", "Error al buscar el tratamiento");
 			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		
 		
-		if(recetaCabecera == null) {
-			response.put("mensaje", "La receta cabecera ID: ".concat(id.toString().concat(" no se encuentra registrada")));
+		if(tratamientosLargos == null) {
+			response.put("mensaje", "El tratamiento ID: ".concat(id.toString().concat(" no se encuentra registrada")));
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
 		}
 		
-		return new ResponseEntity<RecetaCabecera>(recetaCabecera, HttpStatus.OK);
+		return new ResponseEntity<TratamientosLargos>(tratamientosLargos, HttpStatus.OK);
 	}
 	
 	/*@Secured("ROLE_MEDICO")*/
-	@PostMapping("/receta_cabeceras")
-	public ResponseEntity<?> create(@Valid @RequestBody RecetaCabecera recetaCabecera, BindingResult result) {
+	@PostMapping("/tratamientos_largos")
+	public ResponseEntity<?> create(@Valid @RequestBody TratamientosLargos tratamientosLargos, BindingResult result) {
 		
-		RecetaCabecera recetaCabeceraNew = null;
+		TratamientosLargos tratamientosLargosNew = null;
 		Map<String, Object> response = new HashMap<>();
 		
 		if(result.hasErrors()) {
@@ -89,26 +88,23 @@ public class RecetaCabeceraRestController {
 		}
 		
 		try {
-			recetaCabeceraNew = recetaCabeceraService.save(recetaCabecera);
+			tratamientosLargosNew = tratamientosLargosService.save(tratamientosLargos);
 		} catch(DataAccessException e) {
-			response.put("mensaje", "Error al realizar el registro de la cabecera de la receta");
+			response.put("mensaje", "Error al registrar el tratamiento");
 			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
 			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		
-		response.put("mensaje", "El cabecera de la receta ha sido registrada con éxito!");
-		response.put("Receta Cabecera", recetaCabeceraNew);
+		response.put("mensaje", "El tratamiento ha sido registrado como caducado con éxito!");
+		response.put("Tratamientos Largos", tratamientosLargosNew);
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
 	}
 	
-	@GetMapping("/receta_cabeceras/medicos")
-	public List<Medico> listarMedicos(){
-		return recetaCabeceraService.findAllMedicos();
-	}
-	
-	@GetMapping("/receta_cabeceras/pacientes")
-	public List<Paciente> listarPacientes(){
-		return recetaCabeceraService.findAllPacientes();
+	@GetMapping("/tratamientos_largos/receta_cebeceras")
+	public List<RecetaCabecera> listarReceta_Cabeceras(){
+		return tratamientosLargosService.findAllReceta_Cabeceras();
 	}
 	
 }
+
+

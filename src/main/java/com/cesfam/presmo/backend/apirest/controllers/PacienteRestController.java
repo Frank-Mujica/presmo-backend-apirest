@@ -25,7 +25,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.annotation.Secured;
+/*import org.springframework.security.access.annotation.Secured;*/
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -91,7 +91,7 @@ public class PacienteRestController {
 		return new ResponseEntity<Paciente>(paciente, HttpStatus.OK);
 	}
 	
-	@Secured("ROLE_MEDICO")
+	/*@Secured("ROLE_MEDICO")*/
 	@PostMapping("/pacientes")
 	public ResponseEntity<?> create(@Valid @RequestBody Paciente paciente, BindingResult result) {
 		
@@ -122,7 +122,7 @@ public class PacienteRestController {
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
 	}
 	
-	@Secured("ROLE_MEDICO")
+	/*@Secured("ROLE_MEDICO")*/
 	@PutMapping("/pacientes/{id}")
 	public ResponseEntity<?> update(@Valid @RequestBody Paciente paciente, BindingResult result, @PathVariable Long id) {
 		
@@ -180,7 +180,7 @@ public class PacienteRestController {
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
 	}
 	
-	@Secured("ROLE_MEDICO")
+	/*@Secured("ROLE_MEDICO")*/
 	@DeleteMapping("/pacientes/{id}")
 	public ResponseEntity<?> delete(@PathVariable Long id) {
 		Map<String, Object> response = new HashMap<>();
@@ -209,7 +209,7 @@ public class PacienteRestController {
 		
 	}
 	
-	@Secured({"ROLE_MEDICO"})
+	/*@Secured({"ROLE_MEDICO"})*/
 	@PostMapping("/pacientes/upload")
 	public ResponseEntity<?> upload(@RequestParam("file") MultipartFile file, @RequestParam("id") Long id){
 		Map<String, Object> response = new HashMap<>();
