@@ -29,6 +29,7 @@ import com.cesfam.presmo.backend.apirest.models.entity.Reserva;
 import com.cesfam.presmo.backend.apirest.models.entity.Articulo;
 import com.cesfam.presmo.backend.apirest.models.entity.Paciente;
 import com.cesfam.presmo.backend.apirest.models.services.IReservaService;
+import com.cesfam.presmo.backend.apirest.models.services.IPacienteService;
 
 @CrossOrigin(origins= {"http://localhost:4200"})
 @RestController
@@ -37,6 +38,9 @@ public class ReservaRestController {
 	
 	@Autowired
 	private IReservaService reservaService;
+	
+	@Autowired
+	private IReservaService pacienteService;
 	
 	@GetMapping("/reservas")
 	public List<Reserva> index(){
@@ -68,6 +72,28 @@ public class ReservaRestController {
 		}
 		
 		return new ResponseEntity<Reserva>(reserva, HttpStatus.OK);
+	}
+	
+	@GetMapping("/reservas/pacientes/{rut}")
+	public ResponseEntity<?> show(@PathVariable String rut) {
+		
+		Paciente paciente = null;
+		Map<String, Object> response = new HashMap<>();
+		try {
+			paciente = pacienteService.findByRut(rut);
+		} catch(DataAccessException e) {
+			response.put("mensaje", "Error al buscar al paciente");
+			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
+		
+		if(paciente == null) {
+			response.put("mensaje", "El paciente Rut: ".concat(rut.toString().concat(" no se encuentra registrado")));
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
+		}
+		
+		return new ResponseEntity<Paciente>(paciente, HttpStatus.OK);
 	}
 	
 	@Secured("ROLE_MEDICO")

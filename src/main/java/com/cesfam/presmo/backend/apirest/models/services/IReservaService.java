@@ -25,4 +25,6 @@ public interface IReservaService {
 	
 	public List<Paciente> findAllPacientes();
 	
+	public Paciente findByRut(String rut);
+	
 }
