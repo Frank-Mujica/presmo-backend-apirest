@@ -21,7 +21,7 @@ public interface IRecetaDetalleService {
 	
 	public void delete (Long id);
 	
-	public List<RecetaCabecera> findAllReceta_cabeceras();
+	public List<RecetaCabecera> findAllReceta_Cabeceras();
 	
 	public List<Articulo> findAllArticulos();
 	

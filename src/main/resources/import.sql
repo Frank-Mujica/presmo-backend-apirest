@@ -600,3 +600,4 @@ INSERT INTO nacionalidades (pais, gentilicio, iso) VALUES ('Yibuti','Yibutiana',
 INSERT INTO nacionalidades (pais, gentilicio, iso) VALUES ('Zambia','Zambiana','ZMB');
 INSERT INTO nacionalidades (pais, gentilicio, iso) VALUES ('Zimbabue','Zimbabuense','ZWE');
  
+INSERT INTO pacientes (nombre, apellido_paterno, apellido_materno, rut, fecha_nacimiento, numero_celular, telefono_fijo, rut_tutor, nombre_tutor, email_tutor, estado_civil_id, sexo_id, prevision_id, carnet_id, region_id, comuna_id, nacionalidad_id) VALUES ('frank', 'mujica', 'fuentealba', '19.226.507-k', '1995-08-28', 88888888, 99999999, '22.222.222-2', 'Carlos', 'carlos@gmail.com', 1, 1, 1, 1, 7, 103, 39);

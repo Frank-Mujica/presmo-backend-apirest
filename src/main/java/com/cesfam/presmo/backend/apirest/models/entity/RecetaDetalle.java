@@ -31,12 +31,10 @@ public class RecetaDetalle implements Serializable {
 	private Long id;
 	@Column(name = "estado_detalle", nullable = false)
 	private boolean estadoDetalle;
-	@NotEmpty(message = "El campo no puede estar vacío")
-	@Size(min = 1, max = 2)
+	@NotNull(message = "El campo no puede estar vacío")
 	@Column(nullable = false)
 	private int dias;
-	@NotEmpty(message = "El campo no puede estar vacío")
-	@Size(min = 1, max = 2)
+	@NotNull(message = "El campo no puede estar vacío")
 	@Column(nullable = false)
 	private int intervalos;
 	@Column(nullable = false)

@@ -15,12 +15,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
 /*import org.springframework.web.bind.annotation.DeleteMapping;*/
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-/*import org.springframework.web.bind.annotation.PutMapping;*/
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -101,14 +102,56 @@ public class RecetaDetalleRestController {
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
 	}
 	
+	@Secured("ROLE_MEDICO")
+	@PutMapping("/receta_detalles/{id}")
+	public ResponseEntity<?> update(@Validated @RequestBody RecetaDetalle recetaDetalle, BindingResult result, @PathVariable Long id) {
+		
+		RecetaDetalle recetaDetalleActual = recetaDetalleService.findById(id);
+		RecetaDetalle recetaDetalleUpdate = null;
+		
+		Map<String, Object> response = new HashMap<>();
+		
+		if(result.hasErrors()) {
+			
+			List<String> errors = result.getFieldErrors()
+					.stream()
+					.map(err -> err.getField() + "' " + err.getDefaultMessage())
+					.collect(Collectors.toList());
+			
+			response.put("errores", errors);
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.BAD_REQUEST);
+		}
+		
+		if(recetaDetalle == null) {
+			response.put("mensaje", "Error: no se pudo editar, la receta detalle ID: ".concat(id.toString().concat(" no se encuentra registrada")));
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
+		}
+		
+		try {
+
+		recetaDetalleActual.setEstadoDetalle(recetaDetalle.isEstadoDetalle());
+		
+		recetaDetalleUpdate = recetaDetalleService.save(recetaDetalleActual);
+		
+		} catch(DataAccessException e) {
+			response.put("mensaje", "Error al actualizar la partida");
+			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
+		response.put("mensaje", "El detalle de la receta ha sido actualizada con éxito!");
+		response.put("partida", recetaDetalleUpdate);
+		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
+	}
+	
 	@GetMapping("/receta_detalles/articulos")
 	public List<Articulo> listarArticulos(){
 		return recetaDetalleService.findAllArticulos();
 	}
 	
 	@GetMapping("/receta_detalles/receta_cabeceras")
-	public List<RecetaCabecera> listarReceta_cabeceras(){
-		return recetaDetalleService.findAllReceta_cabeceras();
+	public List<RecetaCabecera> listarReceta_Cabeceras(){
+		return recetaDetalleService.findAllReceta_Cabeceras();
 	}
 	
 }
