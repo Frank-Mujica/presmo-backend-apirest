@@ -70,7 +70,7 @@ public class CaducadoRestController {
 		return new ResponseEntity<Caducado>(caducado, HttpStatus.OK);
 	}
 	
-	@Secured("ROLE_MEDICO")
+	@Secured("ROLE_FARMACEUTICO")
 	@PostMapping("/caducados")
 	public ResponseEntity<?> create(@Valid @RequestBody Caducado caducado, BindingResult result) {
 		
