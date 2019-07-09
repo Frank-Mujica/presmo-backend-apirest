@@ -35,22 +35,19 @@ public class Caducado implements Serializable {
 	@NotNull(message = "El campo no puede estar vacío")
 	@Column(nullable = false)
 	private int cantidad;
-	@NotEmpty(message = "El campo no puede estar vacío")
+	@NotNull(message = "El campo no puede estar vacío")
 	@Column(name = "fecha_desechado", nullable = false)
 	@JsonFormat(pattern = "dd/MM/yyyy")
 	@Temporal(TemporalType.DATE)
 	private Date fechaDesechado;
-	@NotEmpty(message = "El campo no puede estar vacío")
 	@Size(min = 9, max = 12, message = "el tamaño debe estar entre 9 y 12 caracteres")
 	@Column(name = "rut_receptor", nullable = false, unique = true)
 	private String rutReceptor;
-	@NotEmpty(message = "no puede estar vacío")
 	@Size(min = 4, max = 30, message = "el tamaño debe estar entre 4 y 30 caracteres")
-	@Column(name = "nombre_receptor", length = 30, nullable = false)
+	@Column(name = "nombre_receptor", length = 30, nullable = true)
 	private String nombreReceptor;
-	@NotEmpty(message = "no puede estar vacío")
 	@Size(min = 4, max = 30, message = "el tamaño debe estar entre 4 y 30 caracteres")
-	@Column(name = "relacion_receptor", length = 30, nullable = false)
+	@Column(name = "relacion_receptor", length = 30, nullable = true)
 	private String relacionReceptor;
 
 	@NotNull(message = "Se debe indicar el farmacéutico a cargo")
