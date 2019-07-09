@@ -8,7 +8,9 @@ INSERT INTO estados_civiles (id, estado_civil) VALUES (3,'Separado');
 INSERT INTO estados_civiles (id, estado_civil) VALUES (4,'Viudo')
 
 INSERT INTO previsiones (id, prevision) VALUES (1,'Fonasa');
-INSERT INTO previsiones (id, prevision) VALUES (2,'Isapre');
+INSERT INTO previsiones (id, prevision) VALUES (2 , 'Banmedica');
+INSERT INTO previsiones (id, prevision) VALUES (3, 'Cruz Blanca');
+INSERT INTO previsiones (id, prevision) VALUES (4, 'Consalud');
 
 INSERT INTO especialidades (especialidad) VALUES ('Forense');
 
